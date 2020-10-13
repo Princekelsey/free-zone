@@ -52,7 +52,8 @@ health information and products allowing them to maintain complete anonymity.
 ### `Back-End`
 
 ● Project setup and installing of project dependencies <br>
-● Creating of Express server and defining node environment variables ● Connecting of MongoDB database with mongoose <br>
+● Creating of Express server and defining node environment variables <br>
+● Connecting of MongoDB database with mongoose <br>
 ● Creating of database schema <br>
 ● Creating of login/signup route and controller <br>
 ● Creating of chat room route and controller <br>
