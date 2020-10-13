@@ -1,21 +1,83 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## FreeZone
+
+A web application that gives young people access to sexual and reproductive
+health information and products allowing them to maintain complete anonymity.
+
+## Technology Stack
+
+### `Front-End Stacks`
+
+● React JS <br>
+● Redux <br>
+● Reselect <br>
+● SASS <br>
+● Momentjs <br>
+● React- router-dom <br>
+● Socket.io <br>
+● Axios <br>
+● Pusher Js
+
+### `Back-End`
+
+● Nodejs <br>
+● Typescript <br>
+● Socket.io <br>
+● Express <br>
+● Mongoose <br>
+● Dotenv <br>
+● Jsonwebtoken <br>
+● Bcryptjs <br>
+● Nodemon <br>
+● Pusher
+
+### `Database`
+
+● MongoDB
+
+## Project Plan
+
+### `Front-End`
+
+● Project setup and installing of project dependencies <br>
+● Connecting application with proxy to the backend server <br>
+● Adding Redux store management <br>
+● Creating of different pages e.g Home, Blogs, Chat, Store etc <br>
+● Creating of reusable elements e.g Button, Cards, Input etc <br>
+● Creating of reusable components e.g Footer, Headers, Nav etc <br>
+● Creating of different sections of the application e.g Doctors/Counselors, Blogs, Services etc <br>
+● Adding ability to create chat rooms, chat with doctors and shop for products. <br>
+● General testing and clean-up <br>
+● Deployment to Netlify <br>
+
+### `Back-End`
+
+● Project setup and installing of project dependencies <br>
+● Creating of Express server and defining node environment variables ● Connecting of MongoDB database with mongoose <br>
+● Creating of database schema <br>
+● Creating of login/signup route and controller <br>
+● Creating of chat room route and controller <br>
+● Creating of public chat history route and controller <br>
+● Creating of private chat history route and controller <br>
+● Creating of blog route and controller <br>
+● Creating of product route and controller <br>
+● Connecting server with websockets <br>
+● General Testing of API and clean up <br>
+● Deployment to Heroku
+
+## Running Application
 
 ## Available Scripts
 
 In the project directory, you can run:
 
+### `client`
+
+cd client and run the following commands
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -25,44 +87,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `server`
 
-### `npm run eject`
+cd server
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `npm run dev`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Starts the server on port 5000
