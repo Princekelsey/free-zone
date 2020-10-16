@@ -9,42 +9,44 @@ https://github.com/Princekelsey/free-zone/wiki
 
 ### `Front-End Stacks`
 
-● React JS <br>
-● Redux <br>
-● Reselect <br>
-● SASS <br>
-● Momentjs <br>
-● React- router-dom <br>
-● Socket.io <br>
-● Axios <br>
-● Pusher Js
+* React JS
+* Redux 
+* Reselect 
+* SASS 
+* Momentjs
+* React- router-dom 
+* Socket.io 
+* Axios 
+* Pusher Js
 
 ### `Back-End`
 
-● Nodejs <br>
-● Typescript <br>
-● Socket.io <br>
-● Express <br>
-● Mongoose <br>
-● Dotenv <br>
-● Jsonwebtoken <br>
-● Bcryptjs <br>
-● Nodemon <br>
-● Pusher
+* Nodejs
+* Typescript 
+* Socket.io 
+* Express 
+* Mongoose 
+* Dotenv
+* Jsonwebtoken 
+* Bcryptjs 
+* Nodemon 
+* Pusher
+* Mutter
+* Cloudinary
 
 ### `Database`
 
-● MongoDB
+MongoDB
 
 ## Project Plan
 
 ### `Front-End`
 
-● Project setup and installing of project dependencies <br>
-● Connecting application with proxy to the backend server <br>
-● Adding Redux store management <br>
-● Creating of different pages e.g Home, Blogs, Chat, Store etc <br>
-● Creating of reusable elements e.g Button, Cards, Input etc <br>
+* Project setup and installing of project dependencies <br>
+* Connecting application with proxy to the backend server <br>
+* Adding Redux store management <br>
+* Creating of different pages e.g Home, Blogs, Chat, Store etc <br>
+* Creating of reusable elements e.g Button, Cards, Input etc <br>
 ● Creating of reusable components e.g Footer, Headers, Nav etc <br>
 ● Creating of different sections of the application e.g Doctors/Counselors, Blogs, Services etc <br>
 ● Adding ability to create chat rooms, chat with doctors and shop for products. <br>
