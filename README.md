@@ -79,6 +79,9 @@ In the project directory, you can run:
 
 cd client and run the following commands
 
+### `npm install`
+Installs all the dependencies for the front end
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
@@ -95,6 +98,9 @@ Your app is ready to be deployed!
 ### `server`
 
 cd server
+
+### `npm install`
+Installs all the dependencies for the backend
 
 ### `npm run dev`
 
