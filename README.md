@@ -42,32 +42,32 @@ MongoDB
 
 ### `Front-End`
 
-* Project setup and installing of project dependencies <br>
-* Connecting application with proxy to the backend server <br>
-* Adding Redux store management <br>
-* Creating of different pages e.g Home, Blogs, Chat, Store etc <br>
-* Creating of reusable elements e.g Button, Cards, Input etc <br>
-● Creating of reusable components e.g Footer, Headers, Nav etc <br>
-● Creating of different sections of the application e.g Doctors/Counselors, Blogs, Services etc <br>
-● Adding ability to create chat rooms, chat with doctors and shop for products. <br>
-● General testing and clean-up <br>
-● Deployment to Netlify <br>
+* Project setup and installing of project dependencies 
+* Connecting application with proxy to the backend server 
+* Adding Redux store management 
+* Creating of different pages e.g Home, Blogs, Chat, Store etc 
+* Creating of reusable elements e.g Button, Cards, Input etc
+* Creating of reusable components e.g Footer, Headers, Nav etc 
+* Creating of different sections of the application e.g Doctors/Counselors, Blogs, Services etc 
+* Adding ability to create chat rooms, chat with doctors and shop for products. 
+* General testing and clean-up 
+* Deployment to Netlify 
 
 ### `Back-End`
 
-● Project setup and installing of project dependencies <br>
-● Creating of Express server and defining node environment variables <br>
-● Connecting of MongoDB database with mongoose <br>
-● Creating of database schema <br>
-● Creating of login/signup route and controller <br>
-● Creating of chat room route and controller <br>
-● Creating of public chat history route and controller <br>
-● Creating of private chat history route and controller <br>
-● Creating of blog route and controller <br>
-● Creating of product route and controller <br>
-● Connecting server with websockets <br>
-● General Testing of API and clean up <br>
-● Deployment to Heroku
+* Project setup and installing of project dependencies 
+* Creating of Express server and defining node environment variables 
+* Connecting of MongoDB database with mongoose
+* Creating of database schema 
+* Creating of login/signup route and controller 
+* Creating of chat room route and controller 
+* Creating of public chat history route and controller 
+* Creating of private chat history route and controller 
+* Creating of blog route and controller 
+* Creating of product route and controller 
+* Connecting server with websockets 
+* General Testing of API and clean up 
+* Deployment to Heroku
 
 ## Running Application
 
