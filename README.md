@@ -2,6 +2,8 @@
 
 A web application that gives young people access to sexual and reproductive
 health information and products allowing them to maintain complete anonymity.
+### Wiki link
+https://github.com/Princekelsey/free-zone/wiki
 
 ## Technology Stack
 
