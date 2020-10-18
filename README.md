@@ -2,68 +2,72 @@
 
 A web application that gives young people access to sexual and reproductive
 health information and products allowing them to maintain complete anonymity.
+### Wiki link
+https://github.com/Princekelsey/free-zone/wiki
 
 ## Technology Stack
 
 ### `Front-End Stacks`
 
-● React JS <br>
-● Redux <br>
-● Reselect <br>
-● SASS <br>
-● Momentjs <br>
-● React- router-dom <br>
-● Socket.io <br>
-● Axios <br>
-● Pusher Js
+* React JS
+* Redux 
+* Reselect 
+* SASS 
+* Momentjs
+* React- router-dom 
+* Socket.io 
+* Axios 
+* Pusher Js
 
 ### `Back-End`
 
-● Nodejs <br>
-● Typescript <br>
-● Socket.io <br>
-● Express <br>
-● Mongoose <br>
-● Dotenv <br>
-● Jsonwebtoken <br>
-● Bcryptjs <br>
-● Nodemon <br>
-● Pusher
+* Nodejs
+* Typescript 
+* Socket.io 
+* Express 
+* Mongoose 
+* Dotenv
+* Jsonwebtoken 
+* Bcryptjs 
+* Nodemon 
+* Pusher
+* Mutter
+* Cloudinary
 
 ### `Database`
 
-● MongoDB
+MongoDB
 
 ## Project Plan
 
 ### `Front-End`
 
-● Project setup and installing of project dependencies <br>
-● Connecting application with proxy to the backend server <br>
-● Adding Redux store management <br>
-● Creating of different pages e.g Home, Blogs, Chat, Store etc <br>
-● Creating of reusable elements e.g Button, Cards, Input etc <br>
-● Creating of reusable components e.g Footer, Headers, Nav etc <br>
-● Creating of different sections of the application e.g Doctors/Counselors, Blogs, Services etc <br>
-● Adding ability to create chat rooms, chat with doctors and shop for products. <br>
-● General testing and clean-up <br>
-● Deployment to Netlify <br>
+* Project setup and installing of project dependencies 
+* Connecting application with proxy to the backend server 
+* Adding Redux store management 
+* Creating of different pages e.g Home, Blogs, Chat, Store etc 
+* Creating of reusable elements e.g Button, Cards, Input etc
+* Creating of reusable components e.g Footer, Headers, Nav etc 
+* Creating of different sections of the application e.g Doctors/Counselors, Blogs, Services etc 
+* Adding ability to create chat rooms, chat with doctors and shop for products. 
+* General testing and clean-up 
+* Deployment to Netlify 
 
 ### `Back-End`
 
-● Project setup and installing of project dependencies <br>
-● Creating of Express server and defining node environment variables <br>
-● Connecting of MongoDB database with mongoose <br>
-● Creating of database schema <br>
-● Creating of login/signup route and controller <br>
-● Creating of chat room route and controller <br>
-● Creating of public chat history route and controller <br>
-● Creating of private chat history route and controller <br>
-● Creating of blog route and controller <br>
-● Creating of product route and controller <br>
-● Connecting server with websockets <br>
-● General Testing of API and clean up <br>
-● Deployment to Heroku
+* Project setup and installing of project dependencies 
+* Creating of Express server and defining node environment variables 
+* Connecting of MongoDB database with mongoose
+* Creating of database schema 
+* Creating of login/signup route and controller 
+* Creating of chat room route and controller 
+* Creating of public chat history route and controller 
+* Creating of private chat history route and controller 
+* Creating of blog route and controller 
+* Creating of product route and controller 
+* Connecting server with websockets 
+* General Testing of API and clean up 
+* Deployment to Heroku
 
 ## Running Application
 
@@ -74,6 +78,9 @@ In the project directory, you can run:
 ### `client`
 
 cd client and run the following commands
+
+### `npm install`
+Installs all the dependencies for the front end
 
 ### `npm start`
 
@@ -91,6 +98,9 @@ Your app is ready to be deployed!
 ### `server`
 
 cd server
+
+### `npm install`
+Installs all the dependencies for the backend
 
 ### `npm run dev`
 
