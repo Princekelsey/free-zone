@@ -1,6 +1,5 @@
 const path = require("path");
 const express = require("express");
-const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv").config({ path: "./config/config.env" });
 const colors = require("colors");
@@ -26,7 +25,6 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // file upload
-app.use(fileUpload());
 
 // static folder
 app.use(express.static(path.join(__dirname, "public")));
