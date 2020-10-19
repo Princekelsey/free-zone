@@ -95,7 +95,7 @@ exports.joinChatRoom = asyncHandler(async (req, res, next) => {
   }
 
   if (!user) {
-    return next(new ErrorResponse(`No user with the ${roomId}`, 404));
+    return next(new ErrorResponse(`No user with the ${userId}`, 404));
   }
 
   const updatedRoom = await Room.findByIdAndUpdate(
