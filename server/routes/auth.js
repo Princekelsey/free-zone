@@ -1,5 +1,4 @@
 const express = require("express");
-const upload = require("../utils/multer").single("image");
 const {
   authorizeUser,
   authorizeConsultant,

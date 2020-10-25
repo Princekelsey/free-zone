@@ -1,5 +1,4 @@
 const ErrorResponse = require("../utils/errorResponse");
-const cloudinary = require("../utils/cloudinary");
 const asyncHandler = require("../middleware/asyncHandler");
 const User = require("../models/Users");
 const Consultant = require("../models/Consultants");
@@ -71,7 +70,6 @@ exports.registerConsultant = asyncHandler(async (req, res, next) => {
     password,
     title,
   });
-  //   const uploadResult = await cloudinary.uploader.upload(req.file.path);
 
   // sign Token and send
   sendTokenResponse(consultant, 200, res);

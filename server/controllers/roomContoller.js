@@ -8,8 +8,16 @@ const User = require("../models/Users");
 // @access  Private
 exports.createChatRoom = asyncHandler(async (req, res, next) => {
   req.body.author = req.user.id;
-
-  const room = await Room.create(req.body);
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    new ErrorResponse(`Not authorized`, 401);
+  }
+  const newData = {
+    roomName: req.body.roomName,
+    author: req.user.id,
+    members: [{ alias: user.alias, userId: req.user.id }],
+  };
+  const room = await Room.create(newData);
 
   res.status(201).json({
     success: true,
@@ -43,7 +51,7 @@ exports.getSingleChatRoom = asyncHandler(async (req, res, next) => {
 
   if (!room) {
     return next(
-      new ErrorResponse(`No chat room with the ${req.params.id}`, 404)
+      new ErrorResponse(`No chat room with the id: ${req.params.id}`, 404)
     );
   }
 
@@ -62,9 +70,12 @@ exports.getAuthorChatRoom = asyncHandler(async (req, res, next) => {
     select: "alias id",
   });
 
-  if (!room) {
+  if (!room || !room.length) {
     return next(
-      new ErrorResponse(`No chat room with the ${req.params.id}`, 404)
+      new ErrorResponse(
+        `No chat room with an author with id:  ${req.params.id}`,
+        404
+      )
     );
   }
 
@@ -75,7 +86,7 @@ exports.getAuthorChatRoom = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Join chatrooms
-// @route   GET /api/v1/room/join
+// @route   POST /api/v1/room/join
 // @access  Public
 exports.joinChatRoom = asyncHandler(async (req, res, next) => {
   const { roomId, userId } = req.body;
@@ -90,12 +101,23 @@ exports.joinChatRoom = asyncHandler(async (req, res, next) => {
 
   const user = await User.findById(userId);
 
+  const userAlready = await Room.find({
+    _id: roomId,
+    members: { $elemMatch: { userId } },
+  });
+
   if (!room) {
     return next(new ErrorResponse(`No chat room with the ${roomId}`, 404));
   }
 
   if (!user) {
     return next(new ErrorResponse(`No user with the ${userId}`, 404));
+  }
+
+  if (userAlready.length) {
+    return next(
+      new ErrorResponse(`User with the ${userId} already joined this room`, 404)
+    );
   }
 
   const updatedRoom = await Room.findByIdAndUpdate(
@@ -113,5 +135,77 @@ exports.joinChatRoom = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: updatedRoom,
+  });
+});
+
+// @desc    Send message to chatrooms
+// @route   POST /api/v1/room/:id/message
+// @access  Private
+exports.sendMessage = asyncHandler(async (req, res, next) => {
+  const { message } = req.body;
+  if (!message || message === "") {
+    return next(new ErrorResponse(`Please enter a message`, 400));
+  }
+  const user = await User.findById(req.user.id);
+  const room = await Room.find({
+    _id: req.params.id,
+    members: { $elemMatch: { userId: req.user.id } },
+  });
+
+  if (!room.length) {
+    return next(new ErrorResponse(`Not authorized`, 401));
+  }
+
+  const messageObj = {
+    message,
+    senderAlias: user.alias,
+    senderId: req.user.id,
+    date: Date.now(),
+  };
+
+  const updatedRoom = await Room.findByIdAndUpdate(
+    { _id: req.params.id },
+    {
+      $push: { chatHistory: messageObj },
+    },
+    { new: true }
+  );
+
+  if (!updatedRoom) {
+    return next(new ErrorResponse(`Error joining room, try again `, 404));
+  }
+
+  res.status(200).json({
+    status: true,
+    data: messageObj,
+  });
+});
+
+// @desc    Delete chatrooms
+// @route   POST /api/v1/room/:id
+// @access  Private
+exports.deleteChatRoom = asyncHandler(async (req, res, next) => {
+  const userRoom = await Room.find({ author: req.user.id });
+  const room = await Room.findById(req.params.id);
+
+  if (!userRoom || !userRoom.length) {
+    return next(
+      new ErrorResponse(
+        `No chat room with an author with id:  ${req.user.id}`,
+        404
+      )
+    );
+  }
+
+  if (!room) {
+    return next(
+      new ErrorResponse(`No chat room with an with id:  ${req.params.id}`, 404)
+    );
+  }
+
+  await Room.findByIdAndDelete(req.params.id);
+  res.status(200).json({
+    success: true,
+    data: { id: req.params.id },
   });
 });

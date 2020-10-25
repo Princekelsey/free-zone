@@ -16,6 +16,7 @@ const ConsultantSchema = new mongoose.Schema({
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please add a valid email",
     ],
+    select: false,
   },
   title: {
     type: String,

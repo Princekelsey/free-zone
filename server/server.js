@@ -7,6 +7,7 @@ const morgan = require("morgan");
 
 const userAuth = require("./routes/auth");
 const chatRoom = require("./routes/room");
+const consultant = require("./routes/consultant");
 const errorHandler = require("./middleware/errorHandler");
 
 const dbConnection = require("./config/db");
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // set routers
 app.use("/api/v1/auth", userAuth);
 app.use("/api/v1/room", chatRoom);
+app.use("/api/v1/consultant", consultant);
 
 //error middleware
 app.use(errorHandler);
