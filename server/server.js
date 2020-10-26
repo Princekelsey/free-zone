@@ -30,6 +30,11 @@ const pusher = new Pusher({
   useTLS: true,
 });
 
+// middlewares
+app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
+
 // watch database change on changestream
 const db = mongoose.connection;
 
@@ -59,17 +64,10 @@ db.once("open", () => {
   });
 });
 
-// middlewares
-app.use(cors());
-app.use(express.json());
-app.use(cookieParser());
-
 // dev logging middleware
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
-// file upload
 
 // static folder
 app.use(express.static(path.join(__dirname, "public")));
