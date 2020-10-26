@@ -4,6 +4,9 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv").config({ path: "./config/config.env" });
 const colors = require("colors");
 const morgan = require("morgan");
+const Pusher = require("pusher");
+const cors = require("cors");
+const mongoose = require("mongoose");
 
 const userAuth = require("./routes/auth");
 const chatRoom = require("./routes/room");
@@ -17,7 +20,47 @@ dbConnection();
 
 const app = express();
 
+// configure pusher listner
+
+const pusher = new Pusher({
+  appId: process.env.PURSER_API_ID,
+  key: process.env.PURSER_API_KEY,
+  secret: process.env.PURSER_SECRET,
+  cluster: "eu",
+  useTLS: true,
+});
+
+// watch database change on changestream
+const db = mongoose.connection;
+
+db.once("open", () => {
+  console.log("connected");
+  const roomChatColllection = db.collection("rooms");
+  const changeStream = roomChatColllection.watch();
+
+  changeStream.on("change", (change) => {
+    if (change.operationType === "update") {
+      const data = change.updateDescription.updatedFields;
+      let newData;
+      for (let item in data) {
+        newData = {
+          _id: data[item]._id,
+          message: data[item].message,
+          senderAlias: data[item].senderAlias,
+          senderId: data[item].senderId,
+          date: data[item].date,
+        };
+      }
+
+      pusher.trigger("rooms", "updated", newData);
+    } else if (change.operationType === "insert") {
+      pusher.trigger("rooms", "inserted", change.fullDocument);
+    }
+  });
+});
+
 // middlewares
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
