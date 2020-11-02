@@ -63,13 +63,19 @@ exports.getCurrentUser = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/auth/consultant/register
 // @access  Public
 exports.registerConsultant = asyncHandler(async (req, res, next) => {
-  const { name, email, password, title } = req.body;
-  const consultant = await Consultant.create({
+  const { name, email, password, title, descrpition, shortInfo } = req.body;
+  const data = {
     name,
     email,
     password,
     title,
-  });
+    shortInfo
+  }
+
+  if (descrpition) {
+    data.descrpition = descrpition
+  }
+  const consultant = await Consultant.create(data);
 
   // sign Token and send
   sendTokenResponse(consultant, 200, res);

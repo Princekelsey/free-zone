@@ -39,7 +39,7 @@ app.use(cookieParser());
 const db = mongoose.connection;
 
 db.once("open", () => {
-  console.log("connected");
+  console.log("connected".green.inverse);
   const roomChatColllection = db.collection("rooms");
   const changeStream = roomChatColllection.watch();
 

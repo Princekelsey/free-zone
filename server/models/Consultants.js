@@ -23,6 +23,15 @@ const ConsultantSchema = new mongoose.Schema({
     required: [true, "Please add a title"],
     enum: ["doctor", "counselor"],
   },
+  descrpition: {
+    type: String, 
+    default: null
+  },
+  shortInfo: {
+    type: String,
+    required: [true, "ShortInfo must be entered"],
+    maxlength: [1000, "ShortInfo cannot be more than 100 characters"],
+  },
   password: {
     type: String,
     required: [true, "Please add a password"],
