@@ -63,9 +63,9 @@ class LoginForm extends React.Component {
                     <fieldset>
                       <div className="mb-12">
                         <Input
-                          type="email"
-                          label="Email"
-                          placeholder="Email"
+                          type="text"
+                          label="Alias"
+                          placeholder="Alias"
                           labelHidden
                           required
                         />

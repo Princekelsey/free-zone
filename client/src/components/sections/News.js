@@ -24,6 +24,7 @@ class News extends React.Component {
       hasBgColor,
       invertColor,
       pushLeft,
+      fullPage,
       ...props
     } = this.props;
 
@@ -71,7 +72,7 @@ class News extends React.Component {
                   <div className="news-item-content">
                     <div className="news-item-body">
                       <h3 className="news-item-title h4 mt-0 mb-8">
-                        <a href="https://cruip.com">How to build anything</a>
+                        <Link to="/blogs/1">How to build anything</Link>
                       </h3>
                       <p className="mb-16 text-sm">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -81,7 +82,7 @@ class News extends React.Component {
                       </p>
                     </div>
                     <div className="news-item-more text-xs mb-8">
-                      <a href="https://cruip.com">Read more</a>
+                      <Link to="/blogs/1">Read more</Link>
                     </div>
                   </div>
                 </div>
@@ -103,7 +104,7 @@ class News extends React.Component {
                   <div className="news-item-content">
                     <div className="news-item-body">
                       <h3 className="news-item-title h4 mt-0 mb-8">
-                        <a href="https://cruip.com">How to build anything</a>
+                        <Link to="/blogs/2">How to build anything</Link>
                       </h3>
                       <p className="mb-16 text-sm">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -113,7 +114,7 @@ class News extends React.Component {
                       </p>
                     </div>
                     <div className="news-item-more text-xs mb-8">
-                      <a href="https://cruip.com">Read more</a>
+                      <Link to="/blogs/2">Read more</Link>
                     </div>
                   </div>
                 </div>
@@ -135,7 +136,7 @@ class News extends React.Component {
                   <div className="news-item-content">
                     <div className="news-item-body">
                       <h3 className="news-item-title h4 mt-0 mb-8">
-                        <a href="https://cruip.com">How to build anything</a>
+                        <Link to="/blogs/3">How to build anything</Link>
                       </h3>
                       <p className="mb-16 text-sm">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -145,14 +146,16 @@ class News extends React.Component {
                       </p>
                     </div>
                     <div className="news-item-more text-xs mb-8">
-                      <a href="https://cruip.com">Read more</a>
+                      <Link to="/blogs/3">Read more</Link>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="news-item-more text-xs mb-8 reveal-from-bottom">
-                <Link to="/blogs/">View All</Link>
-              </div>
+              {!fullPage && (
+                <div className="news-item-more text-xs mb-8">
+                  <Link to="/blogs">View All</Link>
+                </div>
+              )}
             </div>
           </div>
         </div>

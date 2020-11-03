@@ -26,6 +26,7 @@ class Home extends React.Component {
         <FeaturesSplit invertMobile imageFill />
         <Team topDivider teams={teams} isHomePage={true} />
         <News className="illustration-section-01" />
+        <Cta hasBgColor invertColor split />
       </React.Fragment>
     );
   }

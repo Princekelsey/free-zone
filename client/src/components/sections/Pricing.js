@@ -1,25 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { SectionTilesProps } from '../../utils/SectionProps';
-import SectionHeader from './partials/SectionHeader';
-import Switch from '../elements/Switch';
-import Button from '../elements/Button';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { SectionTilesProps } from "../../utils/SectionProps";
+import SectionHeader from "./partials/SectionHeader";
+import Switch from "../elements/Switch";
+import Button from "../elements/Button";
+import Image from "../elements/Image";
 
 const propTypes = {
   ...SectionTilesProps.types,
   pricingSwitcher: PropTypes.bool,
-  pricingSlider: PropTypes.bool
-}
+  pricingSlider: PropTypes.bool,
+};
 
 const defaultProps = {
   ...SectionTilesProps.defaults,
   pricingSwitcher: false,
-  pricingSlider: false
-}
+  pricingSlider: false,
+};
 
 class Pricing extends React.Component {
-
   state = {
     priceChangerValue: "4",
     priceInput: {
@@ -31,83 +31,94 @@ class Pricing extends React.Component {
       5: "3,500",
       6: "6,000",
       7: "15,000",
-      8: "50,000"
+      8: "50,000",
     },
     priceOutput: {
       plan1: {
-        0: ["$", "0", "/m"],
-        1: ["$", "13", "/m"],
-        2: ["$", "17", "/m"],
-        3: ["$", "21", "/m"],
-        4: ["$", "27", "/m"],
-        5: ["$", "42", "/m"],
-        6: ["$", "58", "/m"],
-        7: ["$", "117", "/m"],
-        8: ["$", "208", "/m"]
+        0: ["$", "0"],
+        1: ["$", "13"],
+        2: ["$", "17"],
+        3: ["$", "21"],
+        4: ["$", "27"],
+        5: ["$", "42"],
+        6: ["$", "58"],
+        7: ["$", "117"],
+        8: ["$", "208"],
       },
       plan2: {
-        0: ["$", "13", "/m"],
-        1: ["$", "17", "/m"],
-        2: ["$", "21", "/m"],
-        3: ["$", "25", "/m"],
-        4: ["$", "47", "/m"],
-        5: ["$", "58", "/m"],
-        6: ["$", "117", "/m"],
-        7: ["$", "208", "/m"],
-        8: ["$", "299", "/m"]
+        0: ["$", "13"],
+        1: ["$", "17"],
+        2: ["$", "21"],
+        3: ["$", "25"],
+        4: ["$", "47"],
+        5: ["$", "58"],
+        6: ["$", "117"],
+        7: ["$", "208"],
+        8: ["$", "299"],
       },
       plan3: {
-        0: ["$", "17", "/m"],
-        1: ["$", "21", "/m"],
-        2: ["$", "25", "/m"],
-        3: ["$", "42", "/m"],
-        4: ["$", "67", "/m"],
-        5: ["$", "117", "/m"],
-        6: ["$", "208", "/m"],
-        7: ["$", "299", "/m"],
-        8: ["$", "499", "/m"]
-      }
-    }
-  }
+        0: ["$", "17"],
+        1: ["$", "21"],
+        2: ["$", "25"],
+        3: ["$", "42"],
+        4: ["$", "67"],
+        5: ["$", "117"],
+        6: ["$", "208"],
+        7: ["$", "299"],
+        8: ["$", "499"],
+      },
+    },
+  };
 
   slider = React.createRef();
   sliderValue = React.createRef();
 
   componentDidMount() {
     if (this.props.pricingSlider) {
-      this.slider.current.setAttribute('min', 0);
-      this.slider.current.setAttribute('max', Object.keys(this.state.priceInput).length - 1);
-      this.thumbSize = parseInt(window.getComputedStyle(this.sliderValue.current).getPropertyValue('--thumb-size'), 10);
+      this.slider.current.setAttribute("min", 0);
+      this.slider.current.setAttribute(
+        "max",
+        Object.keys(this.state.priceInput).length - 1
+      );
+      this.thumbSize = parseInt(
+        window
+          .getComputedStyle(this.sliderValue.current)
+          .getPropertyValue("--thumb-size"),
+        10
+      );
       this.handleSliderValuePosition(this.slider.current);
     }
   }
 
   handlePricingSwitch = (e) => {
-    this.setState({ priceChangerValue: e.target.checked ? '1' : '0' });
-  }
+    this.setState({ priceChangerValue: e.target.checked ? "1" : "0" });
+  };
 
   handlePricingSlide = (e) => {
     this.setState({ priceChangerValue: e.target.value });
     this.handleSliderValuePosition(e.target);
-  }
+  };
 
   handleSliderValuePosition = (input) => {
     const multiplier = input.value / input.max;
     const thumbOffset = this.thumbSize * multiplier;
-    const priceInputOffset = (this.thumbSize - this.sliderValue.current.clientWidth) / 2;
-    this.sliderValue.current.style.left = input.clientWidth * multiplier - thumbOffset + priceInputOffset + 'px';
-  }
+    const priceInputOffset =
+      (this.thumbSize - this.sliderValue.current.clientWidth) / 2;
+    this.sliderValue.current.style.left =
+      input.clientWidth * multiplier - thumbOffset + priceInputOffset + "px";
+  };
 
   getPricingData = (values, set) => {
-    return set !== undefined ? values[this.state.priceChangerValue][set] : values[this.state.priceChangerValue];
-  }
+    return set !== undefined
+      ? values[this.state.priceChangerValue][set]
+      : values[this.state.priceChangerValue];
+  };
 
   render() {
-
     const {
       className,
       topOuterDivider,
-      bottomOuterDivider,      
+      bottomOuterDivider,
       topDivider,
       bottomDivider,
       hasBgColor,
@@ -119,49 +130,48 @@ class Pricing extends React.Component {
     } = this.props;
 
     const outerClasses = classNames(
-      'pricing section',
-      topOuterDivider && 'has-top-divider',
-      bottomOuterDivider && 'has-bottom-divider',
-      hasBgColor && 'has-bg-color',
-      invertColor && 'invert-color',
+      "pricing section",
+      topOuterDivider && "has-top-divider",
+      bottomOuterDivider && "has-bottom-divider",
+      hasBgColor && "has-bg-color",
+      invertColor && "invert-color",
       className
     );
 
     const innerClasses = classNames(
-      'pricing-inner section-inner',
-      topDivider && 'has-top-divider',
-      bottomDivider && 'has-bottom-divider'
+      "pricing-inner section-inner",
+      topDivider && "has-top-divider",
+      bottomDivider && "has-bottom-divider"
     );
 
-    const tilesClasses = classNames(
-      'tiles-wrap',
-      pushLeft && 'push-left'
-    );
+    const tilesClasses = classNames("tiles-wrap", pushLeft && "push-left");
 
     const sectionHeader = {
-      title: 'Simple, transparent pricing',
-      paragraph: 'Vitae aliquet nec ullamcorper sit amet risus nullam eget felis semper quis lectus nulla at volutpat diam ut venenatis tellus in ornare.'
+      title: "FreeZone Shop",
+      paragraph:
+        "Vitae aliquet nec ullamcorper sit amet risus nullam eget felis semper quis lectus nulla at volutpat diam ut venenatis tellus in ornare.",
     };
 
     return (
-      <section
-        {...props}
-        className={outerClasses}
-      >
+      <section {...props} className={outerClasses}>
         <div className="container">
           <div className={innerClasses}>
-            <SectionHeader data={sectionHeader} className="center-content invert-color" />
-            {pricingSwitcher &&
+            <SectionHeader
+              data={sectionHeader}
+              className="center-content invert-color"
+            />
+            {pricingSwitcher && (
               <div className="pricing-switcher center-content invert-color">
                 <Switch
-                  checked={this.state.priceChangerValue === '1' ? true : false}
+                  checked={this.state.priceChangerValue === "1" ? true : false}
                   onChange={this.handlePricingSwitch}
-                  rightLabel="Billed Annually">
-                    Billed Monthly
+                  rightLabel="Billed Annually"
+                >
+                  Billed Monthly
                 </Switch>
               </div>
-            }
-            {pricingSlider &&
+            )}
+            {pricingSlider && (
               <div className="pricing-slider center-content invert-color">
                 <label className="form-slider">
                   <span className="mb-16">How many users do you have?</span>
@@ -176,9 +186,8 @@ class Pricing extends React.Component {
                   {this.getPricingData(this.state.priceInput)}
                 </div>
               </div>
-            }            
+            )}
             <div className={tilesClasses}>
-
               <div className="tiles-item reveal-from-bottom">
                 <div className="tiles-item-inner has-shadow">
                   <div className="pricing-item-content">
@@ -190,32 +199,41 @@ class Pricing extends React.Component {
                         <span className="pricing-item-price-amount h1">
                           {this.getPricingData(this.state.priceOutput.plan1, 1)}
                         </span>
-                        <span className="pricing-item-price-after text-sm">{this.getPricingData(this.state.priceOutput.plan1, 2)}</span>
+                        <span className="pricing-item-price-after text-sm">
+                          {this.getPricingData(this.state.priceOutput.plan1, 2)}
+                        </span>
                       </div>
                       <div className="text-xs text-color-low">
                         Lorem ipsum is a common text
                       </div>
                     </div>
                     <div className="pricing-item-features mb-40">
+                      <figure className="news-item-image m-0">
+                        <Image
+                          src={require("./../../assets/images/news-image-03.jpg")}
+                          alt="News 03"
+                          width={344}
+                          height={194}
+                        />
+                      </figure>
                       <div className="pricing-item-features-title h6 text-xs text-color-high mb-24">
-                        What’s included
+                        Product Details
                       </div>
-                      <ul className="pricing-item-features-list list-reset text-xs mb-32">
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li>Excepteur sint occaecat velit</li>
-                        <li>Excepteur sint occaecat velit</li>
-                      </ul>
+                      <p className="text-sm">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Est reprehenderit optio voluptas corporis incidunt
+                      </p>
                     </div>
                   </div>
                   <div className="pricing-item-cta mb-8">
-                    <Button tag="a" color="primary" wide href="http://cruip.com/">Start free trial</Button>
+                    <Button tag="a" color="primary" wide>
+                      Add to cart
+                    </Button>
                   </div>
                 </div>
               </div>
 
-              <div className="tiles-item reveal-from-bottom" data-reveal-delay="200">
+              <div className="tiles-item reveal-from-bottom">
                 <div className="tiles-item-inner has-shadow">
                   <div className="pricing-item-content">
                     <div className="pricing-item-header pb-24 mb-24">
@@ -226,32 +244,41 @@ class Pricing extends React.Component {
                         <span className="pricing-item-price-amount h1">
                           {this.getPricingData(this.state.priceOutput.plan2, 1)}
                         </span>
-                        <span className="pricing-item-price-after text-sm">{this.getPricingData(this.state.priceOutput.plan2, 2)}</span>
+                        <span className="pricing-item-price-after text-sm">
+                          {this.getPricingData(this.state.priceOutput.plan2, 2)}
+                        </span>
                       </div>
                       <div className="text-xs text-color-low">
                         Lorem ipsum is a common text
                       </div>
                     </div>
                     <div className="pricing-item-features mb-40">
+                      <figure className="news-item-image m-0">
+                        <Image
+                          src={require("./../../assets/images/news-image-02.jpg")}
+                          alt="News 02"
+                          width={344}
+                          height={194}
+                        />
+                      </figure>
                       <div className="pricing-item-features-title h6 text-xs text-color-high mb-24">
-                        What’s included
+                        Product Details
                       </div>
-                      <ul className="pricing-item-features-list list-reset text-xs mb-32">
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li>Excepteur sint occaecat velit</li>
-                      </ul>
+                      <p className="text-sm">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Est reprehenderit optio voluptas corporis incidunt
+                      </p>
                     </div>
                   </div>
                   <div className="pricing-item-cta mb-8">
-                    <Button tag="a" color="primary" wide href="http://cruip.com/">Start free trial</Button>
+                    <Button tag="a" color="primary" wide>
+                      Add to cart
+                    </Button>
                   </div>
                 </div>
               </div>
 
-              <div className="tiles-item reveal-from-bottom" data-reveal-delay="400">
+              <div className="tiles-item reveal-from-bottom">
                 <div className="tiles-item-inner has-shadow">
                   <div className="pricing-item-content">
                     <div className="pricing-item-header pb-24 mb-24">
@@ -262,31 +289,39 @@ class Pricing extends React.Component {
                         <span className="pricing-item-price-amount h1">
                           {this.getPricingData(this.state.priceOutput.plan3, 1)}
                         </span>
-                        <span className="pricing-item-price-after text-sm">{this.getPricingData(this.state.priceOutput.plan3, 2)}</span>
+                        <span className="pricing-item-price-after text-sm">
+                          {this.getPricingData(this.state.priceOutput.plan3, 2)}
+                        </span>
                       </div>
                       <div className="text-xs text-color-low">
                         Lorem ipsum is a common text
                       </div>
                     </div>
                     <div className="pricing-item-features mb-40">
+                      <figure className="news-item-image m-0">
+                        <Image
+                          src={require("./../../assets/images/news-image-01.jpg")}
+                          alt="News 01"
+                          width={344}
+                          height={194}
+                        />
+                      </figure>
                       <div className="pricing-item-features-title h6 text-xs text-color-high mb-24">
-                        What’s included
+                        Product Details
                       </div>
-                      <ul className="pricing-item-features-list list-reset text-xs mb-32">
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                        <li className="is-checked">Excepteur sint occaecat velit</li>
-                      </ul>
+                      <p className="text-sm">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Est reprehenderit optio voluptas corporis incidunt
+                      </p>
                     </div>
                   </div>
                   <div className="pricing-item-cta mb-8">
-                    <Button tag="a" color="primary" wide href="http://cruip.com/">Start free trial</Button>
+                    <Button tag="a" color="primary" wide>
+                      Add to cart
+                    </Button>
                   </div>
                 </div>
-              </div>                            
-
+              </div>
             </div>
           </div>
         </div>

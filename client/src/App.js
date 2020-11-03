@@ -1,7 +1,11 @@
 import React, { createRef } from "react";
+import { connect } from "react-redux";
 import { withRouter, Switch } from "react-router-dom";
 import AppRoute from "./utils/AppRoute";
 import ScrollReveal from "./utils/ScrollReveal";
+
+//Actions
+import { getAllConsultants } from "./redux/consultants/consultantsActions";
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
@@ -15,6 +19,10 @@ import Login from "./views/Login";
 import Signup from "./views/Signup";
 import DoctorsAndCounselors from "./views/DoctorsAndCounselors";
 import FrequentQuestions from "./views/FrequentQuestions";
+import Error from "./views/Error";
+import Blogs from "./views/Blogs";
+import SingeBlog from "./views/SingleBlog";
+import Store from "./views/Store";
 
 class App extends React.Component {
   scrollReveal = createRef();
@@ -22,6 +30,7 @@ class App extends React.Component {
   componentDidMount() {
     document.body.classList.add("is-loaded");
     this.scrollReveal.current.init();
+    this.props.getAllConsultants();
   }
 
   // Route change
@@ -68,6 +77,34 @@ class App extends React.Component {
               component={FrequentQuestions}
               layout={LayoutDefault}
             />
+
+            <AppRoute
+              exact
+              path="/shop"
+              component={Store}
+              layout={LayoutDefault}
+            />
+
+            <AppRoute
+              exact
+              path="/blogs"
+              component={Blogs}
+              layout={LayoutDefault}
+            />
+
+            <AppRoute
+              exact
+              path="/blogs/:id"
+              component={SingeBlog}
+              layout={LayoutDefault}
+            />
+
+            <AppRoute
+              // exact
+              // path="/faqs"
+              component={Error}
+              layout={LayoutDefault}
+            />
           </Switch>
         )}
       />
@@ -75,4 +112,10 @@ class App extends React.Component {
   }
 }
 
-export default withRouter((props) => <App {...props} />);
+const mapActionsToProps = {
+  getAllConsultants,
+};
+
+const AppConnected = withRouter((props) => <App {...props} />);
+
+export default connect(null, mapActionsToProps)(AppConnected);

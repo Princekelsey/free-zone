@@ -149,13 +149,13 @@ class Header extends React.Component {
                         <li>
                           <Link
                             to="/login/"
-                            className="button button-secondary button-wide-mobile button-sm"
+                            className="button button-primary button-wide-mobile button-sm"
                             onClick={this.closeMenu}
                           >
                             Login
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link
                             to="/signup/"
                             className="button button-primary button-wide-mobile button-sm"
@@ -163,7 +163,7 @@ class Header extends React.Component {
                           >
                             Sign up
                           </Link>
-                        </li>
+                        </li> */}
                       </ul>
                     )}
                   </div>
