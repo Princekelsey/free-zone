@@ -23,9 +23,9 @@ const ConsultantSchema = new mongoose.Schema({
     required: [true, "Please add a title"],
     enum: ["doctor", "counselor"],
   },
-  descrpition: {
-    type: String, 
-    default: null
+  description: {
+    type: String,
+    default: null,
   },
   shortInfo: {
     type: String,

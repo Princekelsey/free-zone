@@ -63,15 +63,15 @@ class Team extends React.Component {
             <div className={tilesClasses}>
               {teams.map((teamMember) => (
                 <div
-                  className="tiles-item reveal-from-bottom"
+                  className="tiles-item"
                   data-reveal-container=".tiles-wrap"
-                  key={teamMember.id}
+                  key={teamMember._id}
                 >
                   <div className="tiles-item-inner">
                     <div className="team-item-header">
                       <div className="team-item-image mb-24">
                         <Image
-                          src={require(`./../../assets/images/${teamMember.image}`)}
+                          src={teamMember.image}
                           alt={teamMember.name}
                           width={180}
                           height={180}
@@ -82,19 +82,19 @@ class Team extends React.Component {
                       <h5 className="team-item-name mt-0 mb-4">
                         {teamMember.name}
                       </h5>
-                      <div className="team-item-role text-xs fw-600 mb-8">
+                      <div className="team-item-role text-xs fw-600 mb-8 tt-c">
                         {teamMember.title}
                       </div>
-                      <p className="m-0 text-sm">{teamMember.info}</p>
+                      <p className="m-0 text-sm">{teamMember.shortInfo}</p>
                       <Button
                         tag={Link}
                         color="dark"
-                        to={`/chat/${teamMember.id}/`}
+                        to={`/doctors-counselors/${teamMember._id}/`}
                         wideMobile
                         size="sm"
                         className="mt-4"
                       >
-                        Connect
+                        More details
                       </Button>
                     </div>
                   </div>

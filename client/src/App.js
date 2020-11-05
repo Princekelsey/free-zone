@@ -23,6 +23,7 @@ import Error from "./views/Error";
 import Blogs from "./views/Blogs";
 import SingeBlog from "./views/SingleBlog";
 import Store from "./views/Store";
+import Consultant from "./views/Consultant";
 
 class App extends React.Component {
   scrollReveal = createRef();
@@ -69,6 +70,13 @@ class App extends React.Component {
               exact
               path="/doctors-counselors"
               component={DoctorsAndCounselors}
+              layout={LayoutDefault}
+            />
+
+            <AppRoute
+              exact
+              path="/doctors-counselors/:id"
+              component={Consultant}
               layout={LayoutDefault}
             />
             <AppRoute

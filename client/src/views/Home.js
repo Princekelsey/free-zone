@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import HeroSplit from "../components/sections/HeroSplit";
 import FeaturesTiles from "../components/sections/FeaturesTiles";
 import FeaturesTabs from "../components/sections/FeaturesTabs";
@@ -8,12 +10,12 @@ import Pricing from "../components/sections/Pricing";
 import Cta from "../components/sections/Cta";
 import FeaturesSplit from "../components/sections/FeaturesSplit";
 import Team from "../components/sections/Team";
-import { teamsData } from "../utils/data";
-
-const teams = teamsData.slice(0, 3);
+import { selectConsultant } from "../redux/consultants/consultantsSelectors";
 
 class Home extends React.Component {
   render() {
+    const { consultants } = this.props;
+    const teams = consultants.slice(0, 3);
     return (
       <React.Fragment>
         <HeroSplit hasBgColor invertColor />
@@ -32,4 +34,8 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = createStructuredSelector({
+  consultants: selectConsultant,
+});
+
+export default connect(mapStateToProps, {})(Home);
