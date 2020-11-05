@@ -15,7 +15,7 @@ exports.getAllConsultants = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc    Get all consultants
+// @desc    Get single consultants
 // @route   GET /api/v1/consultant/:id
 // @access  Public
 exports.getSingleConsultant = asyncHandler(async (req, res, next) => {
