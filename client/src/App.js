@@ -6,6 +6,7 @@ import ScrollReveal from "./utils/ScrollReveal";
 
 //Actions
 import { getAllConsultants } from "./redux/consultants/consultantsActions";
+import { checkUserSession } from "./redux/auth/authActions";
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
@@ -24,6 +25,7 @@ import Blogs from "./views/Blogs";
 import SingeBlog from "./views/SingleBlog";
 import Store from "./views/Store";
 import Consultant from "./views/Consultant";
+import Arena from "./views/Arena";
 
 class App extends React.Component {
   scrollReveal = createRef();
@@ -32,6 +34,7 @@ class App extends React.Component {
     document.body.classList.add("is-loaded");
     this.scrollReveal.current.init();
     this.props.getAllConsultants();
+    this.props.checkUserSession();
   }
 
   // Route change
@@ -70,6 +73,13 @@ class App extends React.Component {
               exact
               path="/doctors-counselors"
               component={DoctorsAndCounselors}
+              layout={LayoutDefault}
+            />
+
+            <AppRoute
+              exact
+              path="/arena"
+              component={Arena}
               layout={LayoutDefault}
             />
 
@@ -122,6 +132,7 @@ class App extends React.Component {
 
 const mapActionsToProps = {
   getAllConsultants,
+  checkUserSession,
 };
 
 const AppConnected = withRouter((props) => <App {...props} />);

@@ -89,7 +89,7 @@ class Team extends React.Component {
                       <Button
                         tag={Link}
                         color="dark"
-                        to={`/doctors-counselors/${teamMember._id}/`}
+                        to={`/doctors-counselors/${teamMember._id}`}
                         wideMobile
                         size="sm"
                         className="mt-4"

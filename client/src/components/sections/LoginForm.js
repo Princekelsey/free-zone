@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 import { Link } from "react-router-dom";
@@ -6,6 +7,7 @@ import SectionHeader from "./partials/SectionHeader";
 import Input from "../elements/Input";
 import Button from "../elements/Button";
 import Checkbox from "../elements/Checkbox";
+import { loginStart } from "../../redux/auth/authActions";
 
 const propTypes = {
   ...SectionProps.types,
@@ -16,6 +18,40 @@ const defaultProps = {
 };
 
 class LoginForm extends React.Component {
+  state = {
+    alias: "",
+    password: "",
+    error: false,
+  };
+
+  handleChange = (e) => {
+    const { value, name } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  validate = () => {
+    let isError = false;
+    if (!this.state.password) {
+      isError = true;
+    }
+
+    if (!this.state.alias) {
+      isError = true;
+    }
+
+    this.setState({ isError: true });
+    return isError;
+  };
+
+  handleSignIn = (e) => {
+    e.preventDefault();
+    const isError = this.validate();
+    const { alias, password } = this.state;
+    if (!isError) {
+      this.props.loginStart({ alias: alias.toLowerCase(), password });
+    }
+  };
+
   render() {
     const {
       className,
@@ -25,8 +61,11 @@ class LoginForm extends React.Component {
       bottomDivider,
       hasBgColor,
       invertColor,
+      loginStart,
       ...props
     } = this.props;
+
+    const { error, alias, password } = this.state;
 
     const outerClasses = classNames(
       "signin section",
@@ -59,7 +98,7 @@ class LoginForm extends React.Component {
             <div className="tiles-wrap">
               <div className="tiles-item">
                 <div className="tiles-item-inner">
-                  <form>
+                  <form onSubmit={this.handleSignIn}>
                     <fieldset>
                       <div className="mb-12">
                         <Input
@@ -68,6 +107,9 @@ class LoginForm extends React.Component {
                           placeholder="Alias"
                           labelHidden
                           required
+                          name="alias"
+                          value={alias}
+                          onChange={this.handleChange}
                         />
                       </div>
                       <div className="mb-12">
@@ -77,6 +119,9 @@ class LoginForm extends React.Component {
                           placeholder="Password"
                           labelHidden
                           required
+                          name="password"
+                          value={this.state.password}
+                          onChange={this.handleChange}
                         />
                       </div>
                       <div className="mt-24 mb-32">
@@ -116,4 +161,8 @@ class LoginForm extends React.Component {
 LoginForm.propTypes = propTypes;
 LoginForm.defaultProps = defaultProps;
 
-export default LoginForm;
+const mapActionsToProps = {
+  loginStart,
+};
+
+export default connect(null, mapActionsToProps)(LoginForm);

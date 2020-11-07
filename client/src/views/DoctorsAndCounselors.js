@@ -9,7 +9,11 @@ class DoctorsAndCounselors extends Component {
     const { consultants } = this.props;
     return (
       <React.Fragment>
-        <Team teams={consultants} isHomePage={false} />
+        <Team
+          teams={consultants}
+          isHomePage={false}
+          className="illustration-section-01"
+        />
       </React.Fragment>
     );
   }

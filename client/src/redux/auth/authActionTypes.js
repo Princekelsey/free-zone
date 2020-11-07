@@ -4,6 +4,7 @@ const authActionTypes = {
   LOGOUT_USER: "LOGOUT_USER",
   LOGIN_USER_SUCCESS: "LOGIN_USER_SUCCESS",
   LOGIN_USER_FAILED: "LOGIN_USER_FAILED",
+  CHECK_SESSION: "CHECK_SESSION",
 };
 
 export default authActionTypes;

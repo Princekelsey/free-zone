@@ -12,7 +12,7 @@ const FAQHeader = {
 class FrequentQuestions extends Component {
   render() {
     return (
-      <GenericSection topDivider>
+      <GenericSection className="illustration-section-01">
         <div className="container-xs">
           <SectionHeader data={FAQHeader} className="center-content" />
           <Accordion>

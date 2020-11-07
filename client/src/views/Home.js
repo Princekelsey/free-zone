@@ -20,7 +20,7 @@ class Home extends React.Component {
       <React.Fragment>
         <HeroSplit hasBgColor invertColor />
         {/* <FeaturesTiles />
-        <FeaturesTabs topDivider bottomOuterDivider />
+        <FeaturesTabs topDivider bottomOuterDivider isMain />
         <News className="illustration-section-01" />
         <Roadmap topOuterDivider />
         <Pricing hasBgColor pricingSlider />
