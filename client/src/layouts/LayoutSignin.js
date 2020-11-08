@@ -1,13 +1,11 @@
-import React from 'react';
-import Header from '../components/layout/Header';
+import React from "react";
+import Header from "../components/layout/Header";
 
-const LayoutDefault = ({ children }) => (
+const LayoutDefault = ({ children, history }) => (
   <React.Fragment>
-    <Header navPosition="right" hideNav />
-    <main className="site-content">
-      {children}
-    </main>
+    <Header navPosition="right" hideNav history={history} />
+    <main className="site-content">{children}</main>
   </React.Fragment>
 );
 
-export default LayoutDefault;  
+export default LayoutDefault;

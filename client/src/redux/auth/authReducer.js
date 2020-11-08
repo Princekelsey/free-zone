@@ -28,6 +28,12 @@ const authReducer = (state = initialState, { type, payload }) => {
         error: null,
       };
 
+    case authActionTypes.LOGOUT_FAILED:
+      return {
+        ...state,
+        error: payload,
+      };
+
     default:
       return state;
   }

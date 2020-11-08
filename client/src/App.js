@@ -1,12 +1,16 @@
 import React, { createRef } from "react";
 import { connect } from "react-redux";
-import { withRouter, Switch } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
+import { withRouter, Switch, Redirect, Route } from "react-router-dom";
 import AppRoute from "./utils/AppRoute";
 import ScrollReveal from "./utils/ScrollReveal";
 
 //Actions
 import { getAllConsultants } from "./redux/consultants/consultantsActions";
 import { checkUserSession } from "./redux/auth/authActions";
+
+//State selectors
+import { selectCurrentUser } from "./redux/auth/authSelector";
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
@@ -29,6 +33,9 @@ import Arena from "./views/Arena";
 
 class App extends React.Component {
   scrollReveal = createRef();
+  state = {
+    currentLocation: "/",
+  };
 
   componentDidMount() {
     document.body.classList.add("is-loaded");
@@ -44,36 +51,65 @@ class App extends React.Component {
     }
   }
 
+  setCurrentLocation = (location) => {
+    this.setState({ currentLocation: location });
+  };
+
   render() {
+    const { currentUser } = this.props;
+
     return (
       <ScrollReveal
         ref={this.scrollReveal}
         children={() => (
           <Switch>
-            <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
+            <AppRoute
+              exact
+              path="/"
+              component={Home}
+              layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
+            />
             <AppRoute
               exact
               path="/secondary"
               component={Secondary}
               layout={LayoutAlternative}
+              setCurrentLocation={this.setCurrentLocation}
             />
-            <AppRoute
+            <Route
               exact
               path="/login"
-              component={Login}
-              layout={LayoutSignin}
+              render={(props) =>
+                currentUser ? (
+                  <Redirect to={this.state.currentLocation} />
+                ) : (
+                  <LayoutSignin>
+                    <Login {...props} />
+                  </LayoutSignin>
+                )
+              }
             />
-            <AppRoute
+            <Route
               exact
               path="/signup"
-              component={Signup}
-              layout={LayoutSignin}
+              render={(props) =>
+                currentUser ? (
+                  <Redirect to={this.state.currentLocation} />
+                ) : (
+                  <LayoutSignin>
+                    <Signup {...props} />
+                  </LayoutSignin>
+                )
+              }
             />
+
             <AppRoute
               exact
               path="/doctors-counselors"
               component={DoctorsAndCounselors}
               layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
             />
 
             <AppRoute
@@ -81,6 +117,7 @@ class App extends React.Component {
               path="/arena"
               component={Arena}
               layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
             />
 
             <AppRoute
@@ -88,12 +125,14 @@ class App extends React.Component {
               path="/doctors-counselors/:id"
               component={Consultant}
               layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
             />
             <AppRoute
               exact
               path="/faqs"
               component={FrequentQuestions}
               layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
             />
 
             <AppRoute
@@ -101,6 +140,7 @@ class App extends React.Component {
               path="/shop"
               component={Store}
               layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
             />
 
             <AppRoute
@@ -108,6 +148,7 @@ class App extends React.Component {
               path="/blogs"
               component={Blogs}
               layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
             />
 
             <AppRoute
@@ -115,6 +156,7 @@ class App extends React.Component {
               path="/blogs/:id"
               component={SingeBlog}
               layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
             />
 
             <AppRoute
@@ -122,6 +164,7 @@ class App extends React.Component {
               // path="/faqs"
               component={Error}
               layout={LayoutDefault}
+              setCurrentLocation={this.setCurrentLocation}
             />
           </Switch>
         )}
@@ -135,6 +178,10 @@ const mapActionsToProps = {
   checkUserSession,
 };
 
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
 const AppConnected = withRouter((props) => <App {...props} />);
 
-export default connect(null, mapActionsToProps)(AppConnected);
+export default connect(mapStateToProps, mapActionsToProps)(AppConnected);

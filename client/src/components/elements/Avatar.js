@@ -3,7 +3,7 @@ import colors from "../../assets/colors";
 
 class Avatar extends Component {
   render() {
-    const { isConsultant, initials, image, fromChat } = this.props;
+    const { isConsultant, initials, image, fromChat, index } = this.props;
     return (
       <React.Fragment>
         {isConsultant ? (
@@ -18,7 +18,7 @@ class Avatar extends Component {
         ) : (
           <div
             className="roomImage"
-            style={!fromChat ? { backgroundColor: colors[4] } : {}}
+            style={!fromChat ? { backgroundColor: colors[index] } : {}}
           >
             {initials}
           </div>

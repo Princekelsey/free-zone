@@ -1,5 +1,4 @@
-import React, { Component, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { Component } from "react";
 import Accordion from "../components/elements/Accordion";
 import AccordionItem from "../components/elements/AccordionItem";
 import GenericSection from "../components/sections/GenericSection";
@@ -10,6 +9,9 @@ const FAQHeader = {
 };
 
 class FrequentQuestions extends Component {
+  componentDidMount() {
+    this.props.setCurrentLocation(this.props.location.pathname);
+  }
   render() {
     return (
       <GenericSection className="illustration-section-01">

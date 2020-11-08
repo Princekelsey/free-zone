@@ -1,4 +1,5 @@
 import axios from "./Axios";
+import Cookie from "js-cookie";
 
 const Server = {
   getAllConsultants: async () => {
@@ -17,8 +18,20 @@ const Server = {
     return await axios.post("/api/v1/auth/login", userData);
   },
 
-  getCurrentUser: async () => {
-    return await axios.get("/api/v1/auth/user/me");
+  getCurrentUser: async (token) => {
+    return await axios.get("/api/v1/auth/user/me", {
+      headers: { Authorization: `Bearer ${token ? token : ""}` },
+    });
+  },
+
+  getUserRooms: async (token) => {
+    let access = Cookie.get("refreshToken");
+    if (token) {
+      access = token;
+    }
+    return await axios.get("/api/v1/room/joined/user", {
+      headers: { Authorization: `Bearer ${access ? access : ""}` },
+    });
   },
 };
 

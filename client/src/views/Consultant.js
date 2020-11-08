@@ -13,6 +13,7 @@ class Consultant extends Component {
 
   componentDidMount() {
     this.getDetails();
+    this.props.setCurrentLocation(this.props.location.pathname);
   }
 
   async getDetails() {

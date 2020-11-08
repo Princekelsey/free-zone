@@ -1,8 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import Logo from "./partials/Logo";
+import { selectCurrentUser } from "../../redux/auth/authSelector";
+import { FiUser, FiChevronDown } from "react-icons/fi";
+import { MySwal } from "../../utils/toast";
+import { logoutUser } from "../../redux/auth/authActions";
 
 const links = [
   { title: "Arena", target: "/arena" },
@@ -50,6 +56,22 @@ class Header extends React.Component {
     this.closeMenu();
   }
 
+  openModal = () => {
+    const { currentUser, logoutUser, history } = this.props;
+    MySwal.fire({
+      title: `Hey!! ${currentUser ? currentUser.alias.toUpperCase() : ""}`,
+      text: "Do you want to logout ?",
+      showCancelButton: true,
+      confirmButtonColor: "#2174EA",
+      confirmButtonText: "Yes Logout",
+    }).then((result) => {
+      if (result.value) {
+        logoutUser();
+        history.push("/");
+      }
+    });
+  };
+
   openMenu = () => {
     document.body.classList.add("off-nav-is-active");
     this.nav.current.style.maxHeight = this.nav.current.scrollHeight + "px";
@@ -86,6 +108,9 @@ class Header extends React.Component {
       hideSignin,
       bottomOuterDivider,
       bottomDivider,
+      currentUser,
+      history,
+      logoutUser,
       ...props
     } = this.props;
 
@@ -138,13 +163,24 @@ class Header extends React.Component {
                           </Link>
                         </li>
                       ))}
-                      {/* <li>
-                        <Link to="/secondary/" onClick={this.closeMenu}>
-                          Secondary page
-                        </Link>
-                      </li> */}
                     </ul>
-                    {!hideSignin && (
+                    {!hideSignin && currentUser ? (
+                      <ul
+                        className="list-reset header-nav-right"
+                        style={{ cursor: "pointer" }}
+                        onClick={this.openModal}
+                      >
+                        <li>
+                          <FiUser className="mr-8 text-color-primary" />
+                        </li>
+                        <li
+                          className="tt-c fw-600"
+                          style={{ display: "flex", alignItems: "center" }}
+                        >
+                          {currentUser.alias} <FiChevronDown />
+                        </li>
+                      </ul>
+                    ) : (
                       <ul className="list-reset header-nav-right">
                         <li>
                           <Link
@@ -155,15 +191,6 @@ class Header extends React.Component {
                             Login
                           </Link>
                         </li>
-                        {/* <li>
-                          <Link
-                            to="/signup/"
-                            className="button button-primary button-wide-mobile button-sm"
-                            onClick={this.closeMenu}
-                          >
-                            Sign up
-                          </Link>
-                        </li> */}
                       </ul>
                     )}
                   </div>
@@ -180,4 +207,12 @@ class Header extends React.Component {
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+const mapActionsToProps = {
+  logoutUser,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Header);

@@ -13,6 +13,9 @@ import Team from "../components/sections/Team";
 import { selectConsultant } from "../redux/consultants/consultantsSelectors";
 
 class Home extends React.Component {
+  componentDidMount() {
+    this.props.setCurrentLocation(this.props.location.pathname);
+  }
   render() {
     const { consultants } = this.props;
     const teams = consultants.slice(0, 3);

@@ -18,3 +18,7 @@ export const loginFailed = (error) => ({
 export const checkUserSession = () => ({
   type: authActionTypes.CHECK_SESSION,
 });
+
+export const logoutUser = () => ({
+  type: authActionTypes.LOGOUT_START,
+});

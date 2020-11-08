@@ -10,58 +10,38 @@ class ChatContent extends Component {
     this.messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
   render() {
+    const { selectedChatRoom, selectedIndex, currentUser } = this.props;
     return (
       <div className="main__chatcontent">
         <div className="content__header mb-8">
           <div className="blocks">
             <div className="current-chatting-user">
-              <Avatar isConsultant={false} initials="ab" />
-              <p>Homecoming</p>
+              <Avatar
+                isConsultant={false}
+                initials={selectedChatRoom.roomName.substring(0, 2)}
+                index={selectedIndex}
+              />
+              <p>{selectedChatRoom.roomName}</p>
             </div>
           </div>
         </div>
         <div className="content__body">
           <div className="chat__items">
-            <ChatItem
-              user={"me"}
-              //   msg={itm.msg}
-              //   image={itm.image}
-            />
-
-            <ChatItem
-              user={"me"}
-              //   msg={itm.msg}
-              //   image={itm.image}
-            />
-
-            <ChatItem
-              user={"me"}
-              //   msg={itm.msg}
-              //   image={itm.image}
-            />
-            <ChatItem
-              user={"other"}
-              //   msg={itm.msg}
-              //   image={itm.image}
-            />
-
-            <ChatItem
-              user={"me"}
-              //   msg={itm.msg}
-              //   image={itm.image}
-            />
+            {selectedChatRoom.chatHistory.map((chat) => (
+              <ChatItem {...chat} key={chat._id} currentUser={currentUser} />
+            ))}
 
             <div ref={this.messagesEndRef} />
           </div>
         </div>
-        <div className="content__footer">
+        <div className="content__footer has-shadow">
           <div className="sendNewMessage">
             <button className="addFiles">
               <FiPlusSquare />
             </button>
             <input
               type="text"
-              placeholder="Type a message here"
+              placeholder="message  "
               //   onChange={this.onStateChange}
               //   value={this.state.msg}
             />
