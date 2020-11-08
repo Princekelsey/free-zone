@@ -167,6 +167,9 @@ exports.sendMessage = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Please enter a message`, 400));
   }
   const user = await User.findById(req.user.id);
+  if (!user) {
+    return next(new ErrorResponse(`Not authorized`, 401));
+  }
   const room = await Room.find({
     _id: req.params.id,
     members: { $elemMatch: { userId: req.user.id } },
@@ -192,7 +195,7 @@ exports.sendMessage = asyncHandler(async (req, res, next) => {
   );
 
   if (!updatedRoom) {
-    return next(new ErrorResponse(`Error joining room, try again `, 404));
+    return next(new ErrorResponse(`Error sending message, try again `, 404));
   }
 
   res.status(200).json({
