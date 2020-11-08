@@ -85,6 +85,26 @@ exports.getAuthorChatRoom = asyncHandler(async (req, res, next) => {
   });
 });
 
+// @desc    Get chatrooms for a user
+// @route   GET /api/v1/room/joined/user
+// @access  Private
+exports.getUserChatRooms = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    return next(new ErrorResponse("Unauthorized route"));
+  }
+
+  const rooms = await Room.find({
+    members: { $elemMatch: { userId: req.user.id } },
+  }).populate({ path: "author", select: "alias id" });
+
+  res.status(200).json({
+    success: true,
+    data: rooms,
+  });
+});
+
 // @desc    Join chatrooms
 // @route   POST /api/v1/room/join
 // @access  Public

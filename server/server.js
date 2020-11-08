@@ -46,15 +46,24 @@ db.once("open", () => {
   changeStream.on("change", (change) => {
     if (change.operationType === "update") {
       const data = change.updateDescription.updatedFields;
-      let newData;
+
+      let newData = null;
       for (let item in data) {
-        newData = {
-          _id: data[item]._id,
-          message: data[item].message,
-          senderAlias: data[item].senderAlias,
-          senderId: data[item].senderId,
-          date: data[item].date,
-        };
+        if (data[item].message) {
+          newData = {
+            _id: data[item]._id,
+            message: data[item].message,
+            senderAlias: data[item].senderAlias,
+            senderId: data[item].senderId,
+            date: data[item].date,
+          };
+        } else {
+          newData = {
+            _id: data[item]._id,
+            alias: data[item].alias,
+            userId: data[item].userId,
+          };
+        }
       }
 
       pusher.trigger("rooms", "updated", newData);

@@ -7,6 +7,7 @@ const {
   joinChatRoom,
   deleteChatRoom,
   sendMessage,
+  getUserChatRooms,
 } = require("../controllers/roomContoller");
 const { authorizeUser } = require("../middleware/authHandler");
 
@@ -20,5 +21,6 @@ router
 router.route("/author/:id").get(getAuthorChatRoom);
 router.route("/join").post(joinChatRoom);
 router.route("/:id/message").post(authorizeUser, sendMessage);
+router.route("/joined/user").get(authorizeUser, getUserChatRooms);
 
 module.exports = router;

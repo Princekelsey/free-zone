@@ -41,7 +41,7 @@ class ChatContent extends Component {
             </button>
             <input
               type="text"
-              placeholder="message  "
+              placeholder="message"
               //   onChange={this.onStateChange}
               //   value={this.state.msg}
             />
