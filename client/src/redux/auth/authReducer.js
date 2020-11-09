@@ -34,6 +34,20 @@ const authReducer = (state = initialState, { type, payload }) => {
         error: payload,
       };
 
+    case authActionTypes.SIGN_UP_USER_SUCCESS:
+      return {
+        ...state,
+        currentUser: payload,
+        error: null,
+      };
+
+    case authActionTypes.SIGN_UP_USER_FAILED:
+      return {
+        ...state,
+        currentUser: null,
+        error: payload,
+      };
+
     default:
       return state;
   }

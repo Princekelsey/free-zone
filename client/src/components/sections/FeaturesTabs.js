@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 import SectionHeader from "./partials/SectionHeader";
@@ -8,6 +10,9 @@ import { HiUserGroup, HiChatAlt2, HiPlus } from "react-icons/hi";
 import { FiUsers } from "react-icons/fi";
 import ChatRooms from "./chat/ChatRooms";
 import Conversions from "./chat/Conversions";
+import CreateChatRoom from "./chat/CreateChatRoom";
+import NotifyLogin from "./NotifyLogin";
+import { selectCurrentUser } from "../../redux/auth/authSelector";
 
 const propTypes = {
   ...SectionProps.types,
@@ -29,6 +34,7 @@ class FeaturesTabs extends React.Component {
       invertColor,
       pushLeft,
       isMain,
+      currentUser,
       ...props
     } = this.props;
 
@@ -155,33 +161,13 @@ class FeaturesTabs extends React.Component {
                 )}
               </TabList>
               <TabPanel id="tab-a">
-                {/* <Image
-                  className="has-shadow"
-                  src={require("./../../assets/images/features-tabs-image.png")}
-                  alt="Features tabs image 01"
-                  width={896}
-                  height={504}
-                /> */}
                 <ChatRooms />
               </TabPanel>
               <TabPanel id="tab-b">
-                {/* <Image
-                  className="has-shadow"
-                  src={require("./../../assets/images/features-tabs-image.png")}
-                  alt="Features tabs image 02"
-                  width={896}
-                  height={504}
-                /> */}
-                <Conversions />
+                {currentUser ? <Conversions /> : <NotifyLogin />}
               </TabPanel>
               <TabPanel id="tab-c">
-                <Image
-                  className="has-shadow"
-                  src={require("./../../assets/images/features-tabs-image.png")}
-                  alt="Features tabs image 03"
-                  width={896}
-                  height={504}
-                />
+                {currentUser ? <CreateChatRoom /> : <NotifyLogin />}
               </TabPanel>
               <TabPanel id="tab-d">
                 <Image
@@ -203,4 +189,8 @@ class FeaturesTabs extends React.Component {
 FeaturesTabs.propTypes = propTypes;
 FeaturesTabs.defaultProps = defaultProps;
 
-export default FeaturesTabs;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps, {})(FeaturesTabs);

@@ -33,6 +33,34 @@ const Server = {
       headers: { Authorization: `Bearer ${access ? access : ""}` },
     });
   },
+
+  signUpUser: async (userData) => {
+    return await axios.post("/api/v1/auth/register", userData);
+  },
+
+  createRoom: async (roomName, token) => {
+    let access = Cookie.get("refreshToken");
+    if (token) {
+      access = token;
+    }
+    return await axios.post(
+      "/api/v1/room",
+      { roomName },
+      {
+        headers: { Authorization: `Bearer ${access ? access : ""}` },
+      }
+    );
+  },
+
+  joinChatRoom: async (values, token) => {
+    let access = Cookie.get("refreshToken");
+    if (token) {
+      access = token;
+    }
+    return await axios.post("/api/v1/room/join", values, {
+      headers: { Authorization: `Bearer ${access ? access : ""}` },
+    });
+  },
 };
 
 export default Server;

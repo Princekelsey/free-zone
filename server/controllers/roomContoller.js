@@ -10,7 +10,7 @@ exports.createChatRoom = asyncHandler(async (req, res, next) => {
   req.body.author = req.user.id;
   const user = await User.findById(req.user.id);
   if (!user) {
-    new ErrorResponse(`Not authorized`, 401);
+    return new ErrorResponse(`Not authorized`, 401);
   }
   const newData = {
     roomName: req.body.roomName,
@@ -18,6 +18,10 @@ exports.createChatRoom = asyncHandler(async (req, res, next) => {
     members: [{ alias: user.alias, userId: req.user.id }],
   };
   const room = await Room.create(newData);
+
+  if (!room) {
+    return new ErrorResponse(`Error creating room. Try again`, 400);
+  }
 
   res.status(201).json({
     success: true,
@@ -135,9 +139,7 @@ exports.joinChatRoom = asyncHandler(async (req, res, next) => {
   }
 
   if (userAlready.length) {
-    return next(
-      new ErrorResponse(`User with the ${userId} already joined this room`, 404)
-    );
+    return next(new ErrorResponse(`User already joined this room`, 404));
   }
 
   const updatedRoom = await Room.findByIdAndUpdate(
@@ -222,7 +224,7 @@ exports.deleteChatRoom = asyncHandler(async (req, res, next) => {
 
   if (!room) {
     return next(
-      new ErrorResponse(`No chat room with an with id:  ${req.params.id}`, 404)
+      new ErrorResponse(`No chat room with an id:  ${req.params.id}`, 404)
     );
   }
 

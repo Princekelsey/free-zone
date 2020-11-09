@@ -15,7 +15,6 @@ const links = [
   { title: "Doctors/Counselors", target: "/doctors-counselors" },
   { title: "Blog", target: "/blogs" },
   { title: "Shop", target: "/shop" },
-  { title: "Secondary page", target: "/secondary" },
 ];
 
 const propTypes = {
@@ -184,7 +183,7 @@ class Header extends React.Component {
                       <ul className="list-reset header-nav-right">
                         <li>
                           <Link
-                            to="/login/"
+                            to="/login"
                             className="button button-primary button-wide-mobile button-sm"
                             onClick={this.closeMenu}
                           >

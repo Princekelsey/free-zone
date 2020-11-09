@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../elements/Button";
 import { FiArrowRight } from "react-icons/fi";
 import { useChatContext } from "../../../context/ChatContext";
 import Loading from "../../elements/Loading";
 
 const ChatRooms = () => {
-  const { chatRooms, isLoading } = useChatContext();
+  const [selected, setSelected] = useState(-1);
+  const { chatRooms, isLoading, joinRoom, isJoining } = useChatContext();
+
   return (
     <>
       {isLoading ? (
@@ -17,7 +19,17 @@ const ChatRooms = () => {
               <div className="room-item mb-16 has-shadow" key={room._id}>
                 {room.roomName}
                 <div className="room-controls">
-                  <Button size="sm" color="secondary">
+                  <Button
+                    size="sm"
+                    color="secondary"
+                    onClick={() => {
+                      setSelected(room._id);
+                      joinRoom(room._id);
+                    }}
+                    className={
+                      isJoining && selected === room._id ? "is-loading" : ""
+                    }
+                  >
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <span className="tt-u">Join Room</span>
                       <FiArrowRight className="mr-4" />

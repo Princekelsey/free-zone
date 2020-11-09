@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
     const isError = this.validate();
     const { alias, password } = this.state;
     if (!isError) {
-      this.props.loginStart({ alias: alias.toLowerCase(), password });
+      this.props.loginStart({ alias, password });
     }
   };
 
@@ -65,7 +65,7 @@ class LoginForm extends React.Component {
       ...props
     } = this.props;
 
-    const { error, alias, password } = this.state;
+    const { alias, password } = this.state;
 
     const outerClasses = classNames(
       "signin section",
@@ -120,7 +120,7 @@ class LoginForm extends React.Component {
                           labelHidden
                           required
                           name="password"
-                          value={this.state.password}
+                          value={password}
                           onChange={this.handleChange}
                         />
                       </div>
@@ -143,7 +143,7 @@ class LoginForm extends React.Component {
                   <div className="signin-bottom has-top-divider">
                     <div className="pt-32 text-xs center-content text-color-low">
                       Don't you have an account?{" "}
-                      <Link to="/signup/" className="func-link">
+                      <Link to="/signup" className="func-link">
                         Sign up
                       </Link>
                     </div>

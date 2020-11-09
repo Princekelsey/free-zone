@@ -22,3 +22,18 @@ export const checkUserSession = () => ({
 export const logoutUser = () => ({
   type: authActionTypes.LOGOUT_START,
 });
+
+export const signUpUserStart = (request) => ({
+  type: authActionTypes.SIGN_UP_USER_START,
+  payload: request,
+});
+
+export const signUpSuccess = (user) => ({
+  type: authActionTypes.SIGN_UP_USER_SUCCESS,
+  payload: user,
+});
+
+export const signUpFailed = (error) => ({
+  type: authActionTypes.SIGN_UP_USER_FAILED,
+  payload: error,
+});

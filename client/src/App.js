@@ -19,7 +19,6 @@ import LayoutSignin from "./layouts/LayoutSignin";
 
 // Views
 import Home from "./views/Home";
-import Secondary from "./views/Secondary";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import DoctorsAndCounselors from "./views/DoctorsAndCounselors";
@@ -68,13 +67,6 @@ class App extends React.Component {
               path="/"
               component={Home}
               layout={LayoutDefault}
-              setCurrentLocation={this.setCurrentLocation}
-            />
-            <AppRoute
-              exact
-              path="/secondary"
-              component={Secondary}
-              layout={LayoutAlternative}
               setCurrentLocation={this.setCurrentLocation}
             />
             <Route

@@ -1,6 +1,7 @@
 .chat-room {
-  min-height: 80vh;
+  max-height: 65vh;
   overflow: auto;
+  padding: 10px;
 
   .room-item {
     display: flex;
@@ -8,15 +9,13 @@
     align-items: center;
     align-content: center;
     color: #333;
-    /* border: 1px solid #454141; */
     border-radius: 3px;
-    padding: 7px;
+    padding: 10px;
     width: 100%;
     background: #d3d3d3;
 
     &:hover {
       background: #d3d3d3;
-      //   color: #333;
     }
   }
 
@@ -33,7 +32,6 @@
   min-height: 80vh;
   width: 100%;
   border-radius: 10px;
-  //   padding: 20px;
   display: flex;
   padding-left: 0;
 
@@ -53,10 +51,6 @@
   width: 30%;
 }
 .chatlist__heading {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-
   h4 {
     color: #333;
   }
@@ -189,7 +183,6 @@
   padding: 20px 40px;
   width: 70%;
   position: relative;
-  //   border-right: 1px solid #ebe7fb;
 }
 .content__header {
   padding-bottom: 15px;
@@ -269,7 +262,6 @@
   color: #d1d1d1;
 }
 .content__footer {
-  //   padding-top: 30px;
   position: absolute;
   bottom: 0;
   left: 0;

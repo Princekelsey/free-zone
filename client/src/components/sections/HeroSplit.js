@@ -1,10 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { SectionSplitProps } from "../../utils/SectionProps";
-import ButtonGroup from "../elements/ButtonGroup";
-import Button from "../elements/Button";
 import Image from "../elements/Image";
-import Modal from "../elements/Modal";
 
 const propTypes = {
   ...SectionSplitProps.types,
@@ -81,24 +78,6 @@ class HeroSplit extends React.Component {
                     A place for young people to get sexual and reproductive
                     health information and products with complete anonymity.
                   </p>
-                  {/* <ButtonGroup>
-                    <Button
-                      tag="a"
-                      color="primary"
-                      href="https://cruip.com/"
-                      wideMobile
-                    >
-                      Pricing and plans
-                    </Button>
-                    <Button
-                      tag="a"
-                      color="dark"
-                      href="https://cruip.com/"
-                      wideMobile
-                    >
-                      Learn more
-                    </Button>
-                  </ButtonGroup> */}
                 </div>
                 <div className="hero-figure split-item-image split-item-image-fill  reveal-from-bottom">
                   <Image
