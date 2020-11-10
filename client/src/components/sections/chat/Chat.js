@@ -23,7 +23,7 @@ class Chat extends Component {
             data={sectionHeader}
             className="center-content  pb-0"
           />
-          <FeaturesTabs />
+          <FeaturesTabs history={this.props.history} />
         </div>
       </GenericSection>
     );

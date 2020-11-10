@@ -35,6 +35,7 @@ class FeaturesTabs extends React.Component {
       pushLeft,
       isMain,
       currentUser,
+      history,
       ...props
     } = this.props;
 
@@ -77,16 +78,7 @@ class FeaturesTabs extends React.Component {
                         : "features-tabs-tab-image mb-12 p-12"
                     }
                   >
-                    {isMain ? (
-                      <Image
-                        src={require("./../../assets/images/group.svg")}
-                        alt="Tab icon 01"
-                        width={56}
-                        height={56}
-                      />
-                    ) : (
-                      <HiUserGroup size={35} className="text-color-primary" />
-                    )}
+                    <HiUserGroup size={35} className="text-color-primary" />
                   </div>
                   <div className="text-color-high fw-600 text-sm">
                     Arena Chat Rooms
@@ -100,16 +92,7 @@ class FeaturesTabs extends React.Component {
                         : "features-tabs-tab-image mb-12 p-12"
                     }
                   >
-                    {isMain ? (
-                      <Image
-                        src={require("./../../assets/images/features-tabs-icon-02.svg")}
-                        alt="Tab icon 02"
-                        width={56}
-                        height={56}
-                      />
-                    ) : (
-                      <HiChatAlt2 size={35} className="text-color-primary" />
-                    )}
+                    <HiChatAlt2 size={35} className="text-color-primary" />
                   </div>
                   <div className="text-color-high fw-600 text-sm">
                     Joined Conversations
@@ -123,60 +106,21 @@ class FeaturesTabs extends React.Component {
                         : "features-tabs-tab-image mb-12 p-12"
                     }
                   >
-                    {isMain ? (
-                      <Image
-                        src={require("./../../assets/images/features-tabs-icon-03.svg")}
-                        alt="Tab icon 03"
-                        width={56}
-                        height={56}
-                      />
-                    ) : (
-                      <HiPlus size={35} className="text-color-primary" />
-                    )}
+                    <HiPlus size={35} className="text-color-primary" />
                   </div>
                   <div className="text-color-high fw-600 text-sm">
                     Create Chat Room
                   </div>
                 </Tab>
-                {isMain && (
-                  <Tab tabId="tab-d">
-                    <div
-                      className={
-                        isMain
-                          ? "features-tabs-tab-image mb-12"
-                          : "features-tabs-tab-image mb-12 p-12"
-                      }
-                    >
-                      <Image
-                        src={require("./../../assets/images/features-tabs-icon-04.svg")}
-                        alt="Tab icon 04"
-                        width={56}
-                        height={56}
-                      />
-                    </div>
-                    <div className="text-color-high fw-600 text-sm">
-                      Internal Feedback
-                    </div>
-                  </Tab>
-                )}
               </TabList>
               <TabPanel id="tab-a">
-                <ChatRooms />
+                <ChatRooms history={history} />
               </TabPanel>
               <TabPanel id="tab-b">
                 {currentUser ? <Conversions /> : <NotifyLogin />}
               </TabPanel>
               <TabPanel id="tab-c">
                 {currentUser ? <CreateChatRoom /> : <NotifyLogin />}
-              </TabPanel>
-              <TabPanel id="tab-d">
-                <Image
-                  className="has-shadow"
-                  src={require("./../../assets/images/features-tabs-image.png")}
-                  alt="Features tabs image 04"
-                  width={896}
-                  height={504}
-                />
               </TabPanel>
             </Tabs>
           </div>

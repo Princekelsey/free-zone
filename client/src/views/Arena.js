@@ -6,7 +6,7 @@ class Arena extends Component {
     this.props.setCurrentLocation(this.props.location.pathname);
   }
   render() {
-    return <Chat />;
+    return <Chat history={this.props.history} />;
   }
 }
 

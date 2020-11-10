@@ -61,6 +61,20 @@ const Server = {
       headers: { Authorization: `Bearer ${access ? access : ""}` },
     });
   },
+
+  sendChatMessage: async (roomId, message, token) => {
+    let access = Cookie.get("refreshToken");
+    if (token) {
+      access = token;
+    }
+    return await axios.post(
+      `/api/v1/room/${roomId}/message`,
+      { message },
+      {
+        headers: { Authorization: `Bearer ${access ? access : ""}` },
+      }
+    );
+  },
 };
 
 export default Server;

@@ -12,20 +12,6 @@ const defaultProps = {
 };
 
 class HeroSplit extends React.Component {
-  state = {
-    videoModalActive: false,
-  };
-
-  openVideoModal = (e) => {
-    e.preventDefault();
-    this.setState({ videoModalActive: true });
-  };
-
-  closeVideoModal = (e) => {
-    e.preventDefault();
-    this.setState({ videoModalActive: false });
-  };
-
   render() {
     const {
       className,

@@ -60,9 +60,9 @@ class Header extends React.Component {
     MySwal.fire({
       title: `Hey!! ${currentUser ? currentUser.alias.toUpperCase() : ""}`,
       text: "Do you want to logout ?",
-      showCancelButton: true,
       confirmButtonColor: "#2174EA",
       confirmButtonText: "Yes Logout",
+      showCloseButton: true,
     }).then((result) => {
       if (result.value) {
         logoutUser();

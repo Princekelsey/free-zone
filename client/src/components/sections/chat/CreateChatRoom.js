@@ -75,7 +75,7 @@ const CreateChatRoom = () => {
           <Input
             type="text"
             label="Room Name"
-            placeholder="Enter roon name"
+            placeholder="Enter room name"
             labelHidden
             onChange={handleChange}
             value={roomName}

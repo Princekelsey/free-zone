@@ -4,7 +4,7 @@ import { createStructuredSelector } from "reselect";
 import Server from "../api/Server";
 import { selectCurrentUser } from "../redux/auth/authSelector";
 import { Toast } from "../utils/toast";
-import Pusher from "pusher-js";
+import { animateScroll } from "react-scroll";
 
 const ChatContext = createContext();
 
@@ -36,21 +36,48 @@ export const ChatContextProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    const pusher = new Pusher(process.env.REACT_APP_PURSER_API_KEY, {
-      cluster: "eu",
+  const scrollToBottom = () => {
+    animateScroll.scrollToBottom({
+      containerId: "ChatBodyElementID",
+      smooth: true,
     });
+  };
 
-    const channel = pusher.subscribe("rooms");
-    channel.bind("updated", (data) => {
-      console.log(data);
-    });
-
-    return () => {
-      channel.unbind_all();
-      channel.unsubscribe();
-    };
-  }, []);
+  const postChatMessage = async (message) => {
+    try {
+      const { data } = await Server.sendChatMessage(
+        selectedChatRoom._id,
+        message
+      );
+      const roomData = [...userRooms];
+      const index = roomData.findIndex(
+        (room) => room._id === selectedChatRoom._id
+      );
+      if (index !== -1) {
+        roomData[index] = data.data;
+      }
+      setUserRooms(roomData);
+      setSelectedRoom(data.data);
+      scrollToBottom();
+    } catch (error) {
+      const {
+        response: { data },
+      } = error;
+      if (data) {
+        Toast.fire({
+          type: "error",
+          title: data.error,
+          icon: "error",
+        });
+      } else {
+        Toast.fire({
+          type: "error",
+          title: "Error getting rooms. Please try again",
+          icon: "error",
+        });
+      }
+    }
+  };
 
   const getChatRooms = async () => {
     setIsLoading(true);
@@ -162,6 +189,7 @@ export const ChatContextProvider = ({ children }) => {
         joinRoom,
         isFetchingUserRoom,
         isJoining,
+        postChatMessage,
       }}
     >
       {children}

@@ -202,7 +202,7 @@ exports.sendMessage = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     status: true,
-    data: messageObj,
+    data: updatedRoom,
   });
 });
 

@@ -13,6 +13,7 @@ const ChatBody = () => {
     selectedChatRoom,
     userRooms,
     isFetchingUserRoom,
+    postChatMessage,
   } = useChatContext();
 
   const { currentUser } = useSelector(
@@ -36,6 +37,7 @@ const ChatBody = () => {
                   selectedIndex={selectedIndex}
                   selectedChatRoom={selectedChatRoom}
                   currentUser={currentUser}
+                  postChatMessage={postChatMessage}
                 />
               )}
             </>
