@@ -4,9 +4,11 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv").config({ path: "./config/config.env" });
 const colors = require("colors");
 const morgan = require("morgan");
-const Pusher = require("pusher");
 const cors = require("cors");
-const mongoose = require("mongoose");
+
+// models
+const User = require("./models/Users");
+const Room = require("./models/Room");
 
 const userAuth = require("./routes/auth");
 const chatRoom = require("./routes/room");
@@ -14,64 +16,17 @@ const consultant = require("./routes/consultant");
 const errorHandler = require("./middleware/errorHandler");
 
 const dbConnection = require("./config/db");
+const ErrorResponse = require("./utils/errorResponse");
 
 // connect database
 dbConnection();
 
 const app = express();
 
-// configure pusher listner
-
-const pusher = new Pusher({
-  appId: process.env.PURSER_API_ID,
-  key: process.env.PURSER_API_KEY,
-  secret: process.env.PURSER_SECRET,
-  cluster: "eu",
-  useTLS: true,
-});
-
 // middlewares
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-
-// watch database change on changestream
-const db = mongoose.connection;
-
-db.once("open", () => {
-  console.log("connected".green.inverse);
-  const roomChatColllection = db.collection("rooms");
-  const changeStream = roomChatColllection.watch();
-
-  changeStream.on("change", (change) => {
-    if (change.operationType === "update") {
-      const data = change.updateDescription.updatedFields;
-
-      let newData = null;
-      for (let item in data) {
-        if (data[item].message) {
-          newData = {
-            _id: data[item]._id,
-            message: data[item].message,
-            senderAlias: data[item].senderAlias,
-            senderId: data[item].senderId,
-            date: data[item].date,
-          };
-        } else {
-          newData = {
-            _id: data[item]._id,
-            alias: data[item].alias,
-            userId: data[item].userId,
-          };
-        }
-      }
-
-      pusher.trigger("rooms", "updated", newData);
-    } else if (change.operationType === "insert") {
-      pusher.trigger("rooms", "inserted", change.fullDocument);
-    }
-  });
-});
 
 // dev logging middleware
 if (process.env.NODE_ENV === "development") {
@@ -96,6 +51,83 @@ const server = app.listen(PORT, () => {
     `App runing in ${process.env.NODE_ENV} and listening on port ${PORT}!`
       .yellow.bold
   );
+});
+
+const io = require("socket.io")(server);
+
+// step up socket webHooks
+
+io.use(async (socket, next) => {
+  try {
+    const token = socket.handshake.query.token;
+
+    if (!token) {
+      return next(
+        new ErrorResponse("Not authorized to access this route", 401)
+      );
+    }
+
+    const user = await User.findById(token);
+
+    if (!user) {
+      return next(
+        new ErrorResponse("Not authorized to access this route", 401)
+      );
+    }
+    socket.userId = user._id;
+    next();
+  } catch (err) {
+    return next(new ErrorResponse("Not authorized to access this route", 401));
+  }
+});
+
+io.on("connection", (socket) => {
+  console.log("Connected: " + socket.userId);
+
+  socket.on("disconnect", () => {
+    console.log("Disconnected: " + socket.userId);
+  });
+
+  socket.on("joinRoom", ({ chatroomId }) => {
+    socket.join(chatroomId);
+    console.log("A user joined chatroom: " + chatroomId);
+  });
+
+  socket.on("leaveRoom", ({ chatroomId }) => {
+    socket.leave(chatroomId);
+    console.log("A user left chatroom: " + chatroomId);
+  });
+
+  socket.on("chatroomMessage", async ({ chatroomId, message }) => {
+    if (message.trim().length > 0) {
+      const user = await User.findOne({ _id: socket.userId });
+      if (user) {
+        const messageObj = {
+          message,
+          senderAlias: user.alias,
+          senderId: user._id,
+          date: Date.now(),
+        };
+
+        io.to(chatroomId).emit("newMessage", messageObj);
+
+        const room = await Room.find({
+          _id: chatroomId,
+          members: { $elemMatch: { userId: user._id } },
+        });
+
+        if (room.length) {
+          await Room.findByIdAndUpdate(
+            { _id: chatroomId },
+            {
+              $push: { chatHistory: messageObj },
+            },
+            { new: true }
+          );
+        }
+      }
+    }
+  });
 });
 
 // handle promise rejections

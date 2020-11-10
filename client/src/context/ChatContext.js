@@ -4,7 +4,8 @@ import { createStructuredSelector } from "reselect";
 import Server from "../api/Server";
 import { selectCurrentUser } from "../redux/auth/authSelector";
 import { Toast } from "../utils/toast";
-import { animateScroll } from "react-scroll";
+import io from "socket.io-client";
+import { baseURL } from "../api/Axios";
 
 const ChatContext = createContext();
 
@@ -16,6 +17,7 @@ export const ChatContextProvider = ({ children }) => {
   const [isJoining, setIsJoining] = useState(false);
   const [selectedChatRoom, setSelectedRoom] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [socket, setSocket] = useState(null);
 
   const { currentUser } = useSelector(
     createStructuredSelector({
@@ -28,6 +30,12 @@ export const ChatContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    if (currentUser) {
+      setUpSocketConnection();
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
     if (!currentUser) {
       setSelectedRoom(null);
       setSelectedIndex(-1);
@@ -36,47 +44,22 @@ export const ChatContextProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  const scrollToBottom = () => {
-    animateScroll.scrollToBottom({
-      containerId: "ChatBodyElementID",
-      smooth: true,
+  const setUpSocketConnection = () => {
+    const newConnection = io(baseURL, {
+      query: {
+        token: currentUser._id,
+      },
     });
-  };
 
-  const postChatMessage = async (message) => {
-    try {
-      const { data } = await Server.sendChatMessage(
-        selectedChatRoom._id,
-        message
-      );
-      const roomData = [...userRooms];
-      const index = roomData.findIndex(
-        (room) => room._id === selectedChatRoom._id
-      );
-      if (index !== -1) {
-        roomData[index] = data.data;
-      }
-      setUserRooms(roomData);
-      setSelectedRoom(data.data);
-      scrollToBottom();
-    } catch (error) {
-      const {
-        response: { data },
-      } = error;
-      if (data) {
-        Toast.fire({
-          type: "error",
-          title: data.error,
-          icon: "error",
-        });
-      } else {
-        Toast.fire({
-          type: "error",
-          title: "Error getting rooms. Please try again",
-          icon: "error",
-        });
-      }
-    }
+    newConnection.on("disconnect", () => {
+      setSocket(null);
+    });
+
+    newConnection.on("connect", () => {
+      console.log("Connected");
+    });
+
+    setSocket(newConnection);
   };
 
   const getChatRooms = async () => {
@@ -189,7 +172,7 @@ export const ChatContextProvider = ({ children }) => {
         joinRoom,
         isFetchingUserRoom,
         isJoining,
-        postChatMessage,
+        socket,
       }}
     >
       {children}

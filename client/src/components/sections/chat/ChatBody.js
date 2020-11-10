@@ -8,13 +8,7 @@ import ChatContent from "./ChatContent";
 import ChatList from "./ChatList";
 
 const ChatBody = () => {
-  const {
-    selectedIndex,
-    selectedChatRoom,
-    userRooms,
-    isFetchingUserRoom,
-    postChatMessage,
-  } = useChatContext();
+  const { selectedChatRoom, userRooms, isFetchingUserRoom } = useChatContext();
 
   const { currentUser } = useSelector(
     createStructuredSelector({
@@ -32,14 +26,7 @@ const ChatBody = () => {
             <>
               {" "}
               <ChatList userRooms={userRooms} />
-              {selectedChatRoom && (
-                <ChatContent
-                  selectedIndex={selectedIndex}
-                  selectedChatRoom={selectedChatRoom}
-                  currentUser={currentUser}
-                  postChatMessage={postChatMessage}
-                />
-              )}
+              {selectedChatRoom && <ChatContent currentUser={currentUser} />}
             </>
           ) : (
             <p className="fw-700 mt-32 ml-32">

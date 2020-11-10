@@ -75,6 +75,10 @@ const Server = {
       }
     );
   },
+
+  getRoomById: async (roomId) => {
+    return await axios.get(`/api/v1/room/${roomId}`);
+  },
 };
 
 export default Server;
