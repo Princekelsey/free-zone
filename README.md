@@ -3,6 +3,10 @@
 A web application that gives young people access to sexual and reproductive
 health information and products allowing them to maintain complete anonymity.
 
+### View on web
+
+https://freezyy.netlify.app/
+
 ### Wiki link
 
 https://github.com/Princekelsey/free-zone/wiki

@@ -55,16 +55,13 @@ class News extends React.Component {
       <section {...props} className={outerClasses}>
         <div className="container">
           <div className={innerClasses}>
-            <SectionHeader
-              data={sectionHeader}
-              className="center-content reveal-from-bottom"
-            />
+            <SectionHeader data={sectionHeader} className="center-content " />
             <div className={tilesClasses}>
               {blogs.map((blog) => {
                 const { id, title, shortDescription, image } = blog;
 
                 return (
-                  <div className="tiles-item reveal-from-bottom" key={id}>
+                  <div className="tiles-item " key={id}>
                     <div className="tiles-item-inner has-shadow">
                       <figure className="news-item-image m-0">
                         <Image
