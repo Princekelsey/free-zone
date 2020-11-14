@@ -7,6 +7,10 @@ health information and products allowing them to maintain complete anonymity.
 
 https://github.com/Princekelsey/free-zone/wiki
 
+### API Documentation
+
+https://documenter.getpostman.com/view/7336508/TVep8SoW
+
 ## Technology Stack
 
 ### `Front-End Stacks`

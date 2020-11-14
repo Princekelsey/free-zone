@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import News from "../components/sections/News";
+import { newsData } from "../utils/data";
 
 class Blogs extends Component {
   componentDidMount() {
@@ -8,7 +9,11 @@ class Blogs extends Component {
 
   render() {
     return (
-      <News className="has-bg-color-cut illustration-section-02" fullPage />
+      <News
+        className="has-bg-color-cut illustration-section-02"
+        fullPage
+        blogs={newsData}
+      />
     );
   }
 }

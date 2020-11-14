@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { SectionTilesProps } from "../../utils/SectionProps";
 import SectionHeader from "./partials/SectionHeader";
 import Image from "../elements/Image";
+import { newsData } from "../../utils/data";
 
 const propTypes = {
   ...SectionTilesProps.types,
@@ -25,6 +26,7 @@ class News extends React.Component {
       invertColor,
       pushLeft,
       fullPage,
+      blogs,
       ...props
     } = this.props;
 
@@ -59,98 +61,36 @@ class News extends React.Component {
               className="center-content reveal-from-bottom"
             />
             <div className={tilesClasses}>
-              <div className="tiles-item reveal-from-bottom">
-                <div className="tiles-item-inner has-shadow">
-                  <figure className="news-item-image m-0">
-                    <Image
-                      src={require("./../../assets/images/news-image-01.jpg")}
-                      alt="News 01"
-                      width={344}
-                      height={194}
-                    />
-                  </figure>
-                  <div className="news-item-content">
-                    <div className="news-item-body">
-                      <h3 className="news-item-title h4 mt-0 mb-8">
-                        <Link to="/blogs/1">How to build anything</Link>
-                      </h3>
-                      <p className="mb-16 text-sm">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex.
-                      </p>
-                    </div>
-                    <div className="news-item-more text-xs mb-8">
-                      <Link to="/blogs/1">Read more</Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {blogs.map((blog) => {
+                const { id, title, shortDescription, image } = blog;
 
-              <div
-                className="tiles-item reveal-from-bottom"
-                data-reveal-delay="200"
-              >
-                <div className="tiles-item-inner has-shadow">
-                  <figure className="news-item-image m-0">
-                    <Image
-                      src={require("./../../assets/images/news-image-02.jpg")}
-                      alt="News 02"
-                      width={344}
-                      height={194}
-                    />
-                  </figure>
-                  <div className="news-item-content">
-                    <div className="news-item-body">
-                      <h3 className="news-item-title h4 mt-0 mb-8">
-                        <Link to="/blogs/2">How to build anything</Link>
-                      </h3>
-                      <p className="mb-16 text-sm">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex.
-                      </p>
-                    </div>
-                    <div className="news-item-more text-xs mb-8">
-                      <Link to="/blogs/2">Read more</Link>
+                return (
+                  <div className="tiles-item reveal-from-bottom" key={id}>
+                    <div className="tiles-item-inner has-shadow">
+                      <figure className="news-item-image m-0">
+                        <Image
+                          src={require(`./../../assets/images/${image}`)}
+                          alt={title}
+                          width={344}
+                          height={194}
+                        />
+                      </figure>
+                      <div className="news-item-content">
+                        <div className="news-item-body">
+                          <h3 className="news-item-title h4 mt-0 mb-8">
+                            <Link to={`/blogs/${id}`}>{title}</Link>
+                          </h3>
+                          <p className="mb-16 text-sm">{shortDescription}</p>
+                        </div>
+                        <div className="news-item-more text-xs mb-8">
+                          <Link to={`/blogs/${id}`}>Read more</Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                );
+              })}
 
-              <div
-                className="tiles-item reveal-from-bottom"
-                data-reveal-delay="400"
-              >
-                <div className="tiles-item-inner has-shadow">
-                  <figure className="news-item-image m-0">
-                    <Image
-                      src={require("./../../assets/images/news-image-03.jpg")}
-                      alt="News 03"
-                      width={344}
-                      height={194}
-                    />
-                  </figure>
-                  <div className="news-item-content">
-                    <div className="news-item-body">
-                      <h3 className="news-item-title h4 mt-0 mb-8">
-                        <Link to="/blogs/3">How to build anything</Link>
-                      </h3>
-                      <p className="mb-16 text-sm">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex.
-                      </p>
-                    </div>
-                    <div className="news-item-more text-xs mb-8">
-                      <Link to="/blogs/3">Read more</Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
               {!fullPage && (
                 <div className="news-item-more text-xs mb-8">
                   <Link to="/blogs">View All</Link>

@@ -7,6 +7,7 @@ import Cta from "../components/sections/Cta";
 import FeaturesSplit from "../components/sections/FeaturesSplit";
 import Team from "../components/sections/Team";
 import { selectConsultant } from "../redux/consultants/consultantsSelectors";
+import { newsData } from "../utils/data";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -15,12 +16,13 @@ class Home extends React.Component {
   render() {
     const { consultants } = this.props;
     const teams = consultants.slice(0, 3);
+    const blogs = newsData.slice(0, 3);
     return (
       <React.Fragment>
         <HeroSplit hasBgColor invertColor />
         <FeaturesSplit invertMobile imageFill />
         <Team topDivider teams={teams} isHomePage={true} />
-        <News className="illustration-section-01" />
+        <News className="illustration-section-01" blogs={blogs} />
         <Cta hasBgColor invertColor split />
       </React.Fragment>
     );

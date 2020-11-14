@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const baseURL = `http://localhost:5000`;
+export const baseURL = `https://freezone-api.herokuapp.com`;
 
 const token = Cookies.get("refreshToken");
 
