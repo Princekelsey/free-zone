@@ -203,20 +203,20 @@ class Pricing extends React.Component {
                           {this.getPricingData(this.state.priceOutput.plan1, 2)}
                         </span>
                       </div>
-                      <div className="text-xs text-color-low">
-                        Lorem ipsum is a common text
+                      <div className="text-xs text-color-high">
+                        Product Name
                       </div>
                     </div>
                     <div className="pricing-item-features mb-40">
                       <figure className="news-item-image m-0">
                         <Image
-                          src={require("./../../assets/images/news-image-03.jpg")}
-                          alt="News 03"
+                          src={require("./../../assets/images/product1.jpg")}
+                          alt="Product 1"
                           width={344}
-                          height={194}
+                          height={50}
                         />
                       </figure>
-                      <div className="pricing-item-features-title h6 text-xs text-color-high mb-24">
+                      <div className="pricing-item-features-title h6 text-xs text-color-low mb-24">
                         Product Details
                       </div>
                       <p className="text-sm">
@@ -248,20 +248,20 @@ class Pricing extends React.Component {
                           {this.getPricingData(this.state.priceOutput.plan2, 2)}
                         </span>
                       </div>
-                      <div className="text-xs text-color-low">
-                        Lorem ipsum is a common text
+                      <div className="text-xs text-color-high">
+                        Product Name
                       </div>
                     </div>
                     <div className="pricing-item-features mb-40">
                       <figure className="news-item-image m-0">
                         <Image
-                          src={require("./../../assets/images/news-image-02.jpg")}
-                          alt="News 02"
+                          src={require("./../../assets/images/product2.jpg")}
+                          alt="Product 2"
                           width={344}
-                          height={194}
+                          height={50}
                         />
                       </figure>
-                      <div className="pricing-item-features-title h6 text-xs text-color-high mb-24">
+                      <div className="pricing-item-features-title h6 text-xs text-color-low mb-24">
                         Product Details
                       </div>
                       <p className="text-sm">
@@ -293,20 +293,20 @@ class Pricing extends React.Component {
                           {this.getPricingData(this.state.priceOutput.plan3, 2)}
                         </span>
                       </div>
-                      <div className="text-xs text-color-low">
-                        Lorem ipsum is a common text
+                      <div className="text-xs text-color-high">
+                        Product Name
                       </div>
                     </div>
                     <div className="pricing-item-features mb-40">
                       <figure className="news-item-image m-0">
                         <Image
-                          src={require("./../../assets/images/news-image-01.jpg")}
-                          alt="News 01"
+                          src={require("./../../assets/images/product3.jpeg")}
+                          alt="NProduct 3"
                           width={344}
-                          height={194}
+                          height={50}
                         />
                       </figure>
-                      <div className="pricing-item-features-title h6 text-xs text-color-high mb-24">
+                      <div className="pricing-item-features-title h6 text-xs text-color-low mb-24">
                         Product Details
                       </div>
                       <p className="text-sm">

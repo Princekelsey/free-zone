@@ -4,7 +4,6 @@ import classNames from "classnames";
 import { SectionTilesProps } from "../../utils/SectionProps";
 import SectionHeader from "./partials/SectionHeader";
 import Image from "../elements/Image";
-import { newsData } from "../../utils/data";
 
 const propTypes = {
   ...SectionTilesProps.types,

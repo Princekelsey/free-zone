@@ -4,7 +4,6 @@ import { SectionSplitProps } from "../../utils/SectionProps";
 import SectionHeader from "./partials/SectionHeader";
 import Image from "../elements/Image";
 import Button from "../elements/Button";
-import { Link } from "react-router-dom";
 
 const propTypes = {
   ...SectionSplitProps.types,

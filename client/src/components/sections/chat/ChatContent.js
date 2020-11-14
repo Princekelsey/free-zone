@@ -40,12 +40,14 @@ const ChatContent = ({ currentUser }) => {
         scrollToBottom();
       });
     }
+    // eslint-disable-next-line
   }, [chatHistory]);
 
   useEffect(() => {
     if (selectedChatRoom) {
       getRoomData();
     }
+    // eslint-disable-next-line
   }, [selectedChatRoom]);
 
   const scrollToBottom = () => {

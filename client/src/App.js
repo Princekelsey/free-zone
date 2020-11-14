@@ -14,7 +14,6 @@ import { selectCurrentUser } from "./redux/auth/authSelector";
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
-import LayoutAlternative from "./layouts/LayoutAlternative";
 import LayoutSignin from "./layouts/LayoutSignin";
 
 // Views

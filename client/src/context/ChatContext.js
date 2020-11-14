@@ -33,6 +33,7 @@ export const ChatContextProvider = ({ children }) => {
     if (currentUser) {
       setUpSocketConnection();
     }
+    // eslint-disable-next-line
   }, [currentUser]);
 
   useEffect(() => {
