@@ -82,6 +82,8 @@ MongoDB
 
 ## Running Application
 
+Clone repository or download and run the commands below in the project directory
+
 ## Available Scripts
 
 In the project directory, you can run:
