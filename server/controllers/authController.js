@@ -2,6 +2,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/asyncHandler");
 const User = require("../models/Users");
 const Consultant = require("../models/Consultants");
+const cookie = require("cookie");
 
 // @desc    Register User
 // @route   POST /api/v1/auth/register
@@ -33,7 +34,7 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ alias }).select("+password");
 
   if (!user) {
-    return next(new ErrorResponse("Invalid credentials", 401));
+    return next(new ErrorResponse("Invalid credentials", 404));
   }
 
   // comapre password
@@ -63,17 +64,17 @@ exports.getCurrentUser = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/auth/consultant/register
 // @access  Public
 exports.registerConsultant = asyncHandler(async (req, res, next) => {
-  const { name, email, password, title, descrpition, shortInfo } = req.body;
+  const { name, email, password, title, description, shortInfo } = req.body;
   const data = {
     name,
     email,
     password,
     title,
-    shortInfo
-  }
+    shortInfo,
+  };
 
-  if (descrpition) {
-    data.descrpition = descrpition
+  if (description) {
+    data.description = description;
   }
   const consultant = await Consultant.create(data);
 
@@ -96,7 +97,7 @@ exports.loginConsultant = asyncHandler(async (req, res, next) => {
   const consultant = await Consultant.findOne({ email }).select("+password");
 
   if (!consultant) {
-    return next(new ErrorResponse("Invalid credentials", 401));
+    return next(new ErrorResponse("Invalid credentials", 400));
   }
 
   // comapre password
@@ -124,18 +125,19 @@ exports.getCurrentConsultant = asyncHandler(async (req, res, next) => {
 // get token from model,create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
   const token = user.signJWTandReturn();
-  const options = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
 
-  if (process.env.NODE_ENV === "production") {
-    options.secure = true;
-  }
+  res.set(
+    "Set-Cookie",
+    cookie.serialize("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 86400,
+      path: "/",
+    })
+  );
 
-  res.status(statusCode).cookie("token", token, options).json({
+  res.status(statusCode).json({
     success: true,
     token,
   });

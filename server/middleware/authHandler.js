@@ -10,11 +10,9 @@ exports.authorizeUser = asyncHandler(async (req, res, next) => {
   const { authorization } = req.headers;
   if (authorization && authorization.startsWith("Bearer")) {
     token = authorization.split(" ")[1];
+  } else if (req.cookies.token) {
+    token = req.cookies.token;
   }
-
-  // else if (req.cookies.token) {
-  //   token = req.cookies.token;
-  // }
 
   // check if token exists
   if (!token) {
@@ -24,7 +22,9 @@ exports.authorizeUser = asyncHandler(async (req, res, next) => {
   // decode token
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
     req.user = await User.findById(decoded.id);
+
     next();
   } catch (error) {
     return next(new ErrorResponse("Not authorized to access this route", 401));

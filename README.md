@@ -120,3 +120,13 @@ Installs all the dependencies for the backend
 ### `npm run dev`
 
 Starts the server on port 5000
+
+## Running Test
+
+In the project directory, you can run:
+
+### `server`
+
+cd server and run the following commands
+
+### `npm run test`
