@@ -4,6 +4,7 @@ import { SectionSplitProps } from "../../utils/SectionProps";
 import SectionHeader from "./partials/SectionHeader";
 import Image from "../elements/Image";
 import Button from "../elements/Button";
+import { Link } from "react-router-dom";
 
 const propTypes = {
   ...SectionSplitProps.types,
@@ -14,6 +15,18 @@ const defaultProps = {
 };
 
 class ConsultantDetails extends Component {
+  state = {
+    isModal: false,
+  };
+
+  openModal = () => {
+    this.setState({ isModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ isModal: false });
+  };
+
   render() {
     const {
       className,
@@ -80,14 +93,15 @@ class ConsultantDetails extends Component {
                     {consultant.description}
                   </p>
                   <Button
-                    // tag={Link}
+                    tag={Link}
                     color="primary"
-                    // to={`/chat/${consultant._id}/`}
+                    to={`/chat/${consultant._id}/`}
                     wideMobile
                     size="sm"
                     className="mt-16"
+                    onClick={this.openModal}
                   >
-                    Connect
+                    {`Chat with ${consultant.name}`}
                   </Button>
                 </div>
                 <div

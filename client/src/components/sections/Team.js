@@ -48,8 +48,8 @@ class Team extends React.Component {
     const tilesClasses = classNames("tiles-wrap", pushLeft && "push-left");
 
     const sectionHeader = {
-      title: "Get To Know Our Doctors And Counselors",
-      paragraph: "Meet our certified and dedicated doctors and counselors  ",
+      title: "Get To Know Our Doctors And Counsellors",
+      paragraph: "Meet our certified and dedicated doctors and counsellors  ",
     };
 
     return (

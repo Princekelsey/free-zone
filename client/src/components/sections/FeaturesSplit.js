@@ -68,7 +68,7 @@ class FeaturesSplit extends React.Component {
                     className="mt-0 mb-16 reveal-from-bottom"
                     data-reveal-container=".split-item"
                   >
-                    Access Doctors and Counselors
+                    Access Doctors and Counsellors
                   </h3>
                   <p
                     className="m-0 reveal-from-bottom"
@@ -76,7 +76,7 @@ class FeaturesSplit extends React.Component {
                     data-reveal-container=".split-item"
                   >
                     Connect and chat with certified and verified doctors and
-                    counselors. We have qualified doctors and counselors with
+                    counsellors. We have qualified doctors and counsellors with
                     years of experience to help with your questions.
                   </p>
                 </div>

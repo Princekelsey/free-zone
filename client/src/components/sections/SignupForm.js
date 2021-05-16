@@ -8,6 +8,9 @@ import Input from "../elements/Input";
 import Button from "../elements/Button";
 import { signUpUserStart } from "../../redux/auth/authActions";
 import { MySwal } from "../../utils/toast";
+import { selectLoadingState } from "../../redux/auth/authSelector";
+import { createStructuredSelector } from "reselect";
+import Loading from "../elements/Loading";
 
 const propTypes = {
   ...SectionProps.types,
@@ -75,6 +78,7 @@ class SignupForm extends React.Component {
       hasBgColor,
       invertColor,
       signUpStart,
+      isLoading,
       ...props
     } = this.props;
 
@@ -101,6 +105,11 @@ class SignupForm extends React.Component {
 
     return (
       <section {...props} className={outerClasses}>
+        {isLoading && (
+          <div className="center-content">
+            <Loading />
+          </div>
+        )}
         <div className="container">
           <div className={innerClasses}>
             <SectionHeader
@@ -181,4 +190,8 @@ const mapActionsToProps = {
   signUpStart: signUpUserStart,
 };
 
-export default connect(null, mapActionsToProps)(SignupForm);
+const mapStateToProps = createStructuredSelector({
+  isLoading: selectLoadingState,
+});
+
+export default connect(mapStateToProps, mapActionsToProps)(SignupForm);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "../../elements/Avatar";
-import { FiPlusSquare, FiSend } from "react-icons/fi";
+import { FiSend } from "react-icons/fi";
 import ChatItem from "./ChatItem";
 import { useChatContext } from "../../../context/ChatContext";
 import Server from "../../../api/Server";
@@ -140,9 +140,9 @@ const ChatContent = ({ currentUser }) => {
       </div>
       <div className="content__footer has-shadow">
         <div className="sendNewMessage">
-          <button className="addFiles">
+          {/* <button className="addFiles">
             <FiPlusSquare />
-          </button>
+          </button> */}
           <input
             type="text"
             placeholder="message"

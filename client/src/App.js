@@ -2,6 +2,7 @@ import React, { createRef } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withRouter, Switch, Redirect, Route } from "react-router-dom";
+import { loadProgressBar } from "axios-progress-bar";
 import AppRoute from "./utils/AppRoute";
 import ScrollReveal from "./utils/ScrollReveal";
 
@@ -28,6 +29,7 @@ import SingeBlog from "./views/SingleBlog";
 import Store from "./views/Store";
 import Consultant from "./views/Consultant";
 import Arena from "./views/Arena";
+import PrivateChatPage from "./views/PrivateChatPage";
 
 class App extends React.Component {
   scrollReveal = createRef();
@@ -36,6 +38,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    loadProgressBar();
     document.body.classList.add("is-loaded");
     this.scrollReveal.current.init();
     this.props.getAllConsultants();
@@ -95,6 +98,24 @@ class App extends React.Component {
               }
             />
 
+            <Route
+              exact
+              path="/chat/:id"
+              render={(props) =>
+                currentUser ? (
+                  <LayoutDefault {...props}>
+                    <PrivateChatPage
+                      setCurrentLocation={this.setCurrentLocation}
+                      {...props}
+                    />
+                  </LayoutDefault>
+                ) : (
+                  <LayoutSignin>
+                    <Login {...props} />
+                  </LayoutSignin>
+                )
+              }
+            />
             <AppRoute
               exact
               path="/doctors-counselors"

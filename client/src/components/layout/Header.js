@@ -12,7 +12,7 @@ import { logoutUser } from "../../redux/auth/authActions";
 
 const links = [
   { title: "Arena", target: "/arena" },
-  { title: "Doctors/Counselors", target: "/doctors-counselors" },
+  { title: "Doctors/Counsellors", target: "/doctors-counselors" },
   { title: "Blog", target: "/blogs" },
   { title: "Shop", target: "/shop" },
 ];

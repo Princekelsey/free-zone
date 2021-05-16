@@ -6,6 +6,7 @@ import SectionHeader from "./partials/SectionHeader";
 import Switch from "../elements/Switch";
 import Button from "../elements/Button";
 import Image from "../elements/Image";
+import { MySwal } from "../../utils/toast";
 
 const propTypes = {
   ...SectionTilesProps.types,
@@ -21,6 +22,7 @@ const defaultProps = {
 
 class Pricing extends React.Component {
   state = {
+    isModal: false,
     priceChangerValue: "4",
     priceInput: {
       0: "1,000",
@@ -112,6 +114,15 @@ class Pricing extends React.Component {
     return set !== undefined
       ? values[this.state.priceChangerValue][set]
       : values[this.state.priceChangerValue];
+  };
+
+  comingSoon = () => {
+    MySwal.fire({
+      title: "Coming soon!!",
+      text: "Hey!!, this feature is coming soon",
+      icon: "info",
+      showCloseButton: true,
+    });
   };
 
   render() {
@@ -226,7 +237,12 @@ class Pricing extends React.Component {
                     </div>
                   </div>
                   <div className="pricing-item-cta mb-8">
-                    <Button tag="a" color="primary" wide>
+                    <Button
+                      tag="a"
+                      color="primary"
+                      wide
+                      onClick={this.comingSoon}
+                    >
                       Add to cart
                     </Button>
                   </div>
@@ -271,7 +287,12 @@ class Pricing extends React.Component {
                     </div>
                   </div>
                   <div className="pricing-item-cta mb-8">
-                    <Button tag="a" color="primary" wide>
+                    <Button
+                      tag="a"
+                      color="primary"
+                      wide
+                      onClick={this.comingSoon}
+                    >
                       Add to cart
                     </Button>
                   </div>
@@ -316,7 +337,12 @@ class Pricing extends React.Component {
                     </div>
                   </div>
                   <div className="pricing-item-cta mb-8">
-                    <Button tag="a" color="primary" wide>
+                    <Button
+                      tag="a"
+                      color="primary"
+                      wide
+                      onClick={this.comingSoon}
+                    >
                       Add to cart
                     </Button>
                   </div>

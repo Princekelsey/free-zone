@@ -9,8 +9,8 @@ import { store } from "./redux/store";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-//import './App.css';
 import "./assets/scss/style.scss";
+import "axios-progress-bar/dist/nprogress.css";
 
 const history = createBrowserHistory();
 
