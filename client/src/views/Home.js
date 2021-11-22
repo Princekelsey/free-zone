@@ -3,14 +3,15 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import HeroSplit from "../components/sections/HeroSplit";
 import News from "../components/sections/News";
-import Cta from "../components/sections/Cta";
 import FeaturesSplit from "../components/sections/FeaturesSplit";
 import Team from "../components/sections/Team";
 import { selectConsultant } from "../redux/consultants/consultantsSelectors";
 import { newsData } from "../utils/data";
+import { loadProgressBar } from "axios-progress-bar";
 
 class Home extends React.Component {
   componentDidMount() {
+    loadProgressBar();
     this.props.setCurrentLocation(this.props.location.pathname);
   }
   render() {
@@ -23,7 +24,6 @@ class Home extends React.Component {
         <FeaturesSplit invertMobile imageFill />
         <Team topDivider teams={teams} isHomePage={true} />
         <News className="illustration-section-01" blogs={blogs} />
-        <Cta hasBgColor invertColor split />
       </React.Fragment>
     );
   }

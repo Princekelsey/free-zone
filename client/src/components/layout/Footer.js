@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Logo from "./partials/LogoInvert";
-import FooterNav from "./partials/FooterNav";
 import FooterSocial from "./partials/FooterSocial";
 
 const propTypes = {
@@ -39,7 +38,7 @@ class Footer extends React.Component {
               <FooterSocial />
             </div>
             <div className="footer-bottom space-between text-xxs invert-order-desktop">
-              <FooterNav />
+              {/* <FooterNav /> */}
               <div className="footer-copyright">
                 &copy; {new Date().getFullYear()} FreeZone, all rights reserved
               </div>

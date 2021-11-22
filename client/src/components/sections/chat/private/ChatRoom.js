@@ -92,7 +92,7 @@ class ChatRoom extends Component {
       <React.Fragment>
         <SectionHeader
           data={{
-            paragraph: ` This is a simulation of a chat between a consultant (Doctor/Counsellor) and a user for
+            paragraph: `This is a simulation of a chat between a consultant (Doctor/Counsellor) and a user for
               testing (consultant on the left and user on the right). When the application is in production, consultant (Doctor/Counsellor) and user will
               only see their own chat environment. `,
           }}

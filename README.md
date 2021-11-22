@@ -117,6 +117,14 @@ cd server
 
 Installs all the dependencies for the backend
 
+cd config
+
+###
+
+    cp config.example.env confg.env
+
+`Please contact me through my email to provide missing environment variables`
+
 ### `npm run dev`
 
 Starts the server on port 5000

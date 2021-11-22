@@ -2,7 +2,6 @@ import React, { createRef } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withRouter, Switch, Redirect, Route } from "react-router-dom";
-import { loadProgressBar } from "axios-progress-bar";
 import AppRoute from "./utils/AppRoute";
 import ScrollReveal from "./utils/ScrollReveal";
 
@@ -38,7 +37,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    loadProgressBar();
     document.body.classList.add("is-loaded");
     this.scrollReveal.current.init();
     this.props.getAllConsultants();

@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import SectionHeader from "./partials/SectionHeader";
 import Input from "../elements/Input";
 import Button from "../elements/Button";
-import Checkbox from "../elements/Checkbox";
 import { loginStart } from "../../redux/auth/authActions";
 import Loading from "../elements/Loading";
 import { selectLoadingState } from "../../redux/auth/authSelector";
@@ -137,15 +136,6 @@ class LoginForm extends React.Component {
                         <Button color="primary" wide>
                           Sign in
                         </Button>
-                      </div>
-                      <div className="signin-footer mb-32">
-                        <Checkbox>Remember me</Checkbox>
-                        <Link
-                          to="/recover-password/"
-                          className="func-link text-xs"
-                        >
-                          Forgot password?
-                        </Link>
                       </div>
                     </fieldset>
                   </form>
